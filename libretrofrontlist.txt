@@ -3,7 +3,7 @@ sorted by date of first known start
 name         | authors                  | status                   | technology, goals
 ------------- -------------------------- -------------------------- ------------------
 bsnes-qt     | unknown (Themaister?)    | abandoned or canceled    | based on bsnes v070, used libsnes
-SSNES        | Squarepusher, Themaister | renamed, now RetroArch   | used libsnes
+SSNES        | Themaister, Squarepusher | renamed, now RetroArch   | used libsnes
 lsnes        | someone from TASVideos?  | released, active?        | started as libsnes, unknown if it got upgraded
 LMSW         | Alcaro                   | released, abandoned      | plugin for a level editor
              |                          |                          | http://s373.photobucket.com/user/alcaroops/media/clip0003.mp4.html
@@ -18,5 +18,4 @@ nameless     | 4chan                    | no recent news,          | unknown
              |                          |  nor any news at all     |
 nameless     | kekun                    | no recent news           | gtk3 only
 Arcan        | letoram                  | active?                  | seems to be an entire window manager
-Pantheon     | Druage, thecanadianbacon | renamed to Phoenix?      | qt, otherwise unknown, may be a RetroArch launcher
-Phoenix      | haven't paid attention   | active                   | haven't paid attention
+Phoenix      | Druage, athairus, others | active                   | Qt5, was previously a RetroArch launcher named Pantheon
