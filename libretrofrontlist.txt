@@ -9,8 +9,8 @@ LMSW         | Alcaro                   | released, abandoned      | plugin for 
              |                          |                          | http://s373.photobucket.com/user/alcaroops/media/clip0003.mp4.html
 RetroArch    | Squarepusher, Themaister | released, active         | most fully featured, main driver for libretro expansions,
              |                          |                          |  most supported platforms, focused on HTPC-style setups
-XBMC /       | many authors             | no recent news, probably | built inside a video player
- RetroPlayer |                          |  waiting to be released  |  (but ffmpeg is a video player in libretro, so it's fair)
+XBMC /       | many authors             | no recent news,          | built inside a video player
+ RetroPlayer |                          |  probably abandoned      |  (but ffmpeg is a video player in libretro, so it's fair)
 ZMZ          | Alcaro                   | released, abandoned      | based on ZSNES' GUI
 minir        | Alcaro                   | active                   | win32/gtk3/other?, focused on WIMP setups
 nameless     | mudlord                  | canceled?                | WTL, statically linked core
