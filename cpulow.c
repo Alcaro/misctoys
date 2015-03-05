@@ -62,7 +62,15 @@ void handle_event(RAWINPUT* input)
 		//USHORT vkey=input->data.keyboard.VKey;
 		//BOOL down=!(input->data.keyboard.Flags&RI_KEY_BREAK);
 		
-		if (input->data.keyboard.MakeCode==0x1A && (input->data.keyboard.Flags&RI_KEY_BREAK) && (GetKeyState(VK_LCONTROL)&0x8000))
+//printf("%.4X %.4X %.4X %.4X %.8X %.8X\n",
+//input->data.keyboard.MakeCode,
+//input->data.keyboard.Flags,
+//input->data.keyboard.Reserved,
+//input->data.keyboard.VKey,
+//input->data.keyboard.Message,
+//input->data.keyboard.ExtraInformation);
+		if (input->data.keyboard.MakeCode==0x1A && (input->data.keyboard.Flags&RI_KEY_E0) && input->data.keyboard.VKey == 0xFF &&
+		    (input->data.keyboard.Flags&RI_KEY_BREAK) && (GetKeyState(VK_LCONTROL)&0x8000))
 		{
 			toggle_speed();
 		}
