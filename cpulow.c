@@ -54,6 +54,11 @@ void toggle_speed()
 	//Beep(fast ? 2000 : 1000, 200);
 }
 
+void turn_off_monitor()
+{
+	SendMessage(HWND_BROADCAST, WM_SYSCOMMAND, SC_MONITORPOWER, 2 /*POWER_OFF*/);
+}
+
 void handle_event(RAWINPUT* input)
 {
 	if (input->header.dwType==RIM_TYPEKEYBOARD)//unneeded check, we only ask for keyboard; could be relevant later, though.
@@ -70,9 +75,20 @@ void handle_event(RAWINPUT* input)
 //input->data.keyboard.Message,
 //input->data.keyboard.ExtraInformation);
 		if (input->data.keyboard.MakeCode==0x1A && (input->data.keyboard.Flags&RI_KEY_E0) && input->data.keyboard.VKey == 0xFF &&
-		    (input->data.keyboard.Flags&RI_KEY_BREAK) && (GetKeyState(VK_LCONTROL)&0x8000))
+		    (input->data.keyboard.Flags&RI_KEY_BREAK))
 		{
-			toggle_speed();
+			if (GetKeyState(VK_LCONTROL)&0x8000)
+			{
+				toggle_speed();
+			}
+			else
+			{
+				turn_off_monitor();
+				Beep(1000, 80);
+				Beep(1000, 80);
+				Beep(1000, 80);
+				Beep(1000, 80);
+			}
 		}
 	}
 }
