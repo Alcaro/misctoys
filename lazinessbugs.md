@@ -5,6 +5,13 @@ For various bugs which I have found in various programs, but have not reported, 
 unresponsive or user-hostile bug reporting systems. If you don't want my reports, I'm happy to
 oblige.
 
+I try to report bugs through the official channels if available (or, if on GitHub and a fix is
+obvious, I submit a PR). For example, I've submitted about 30 bugs in WolframAlpha through the
+feedback form at the bottom, several of which are reported fixed.
+
+If anyone reading this wants to report these bugs, feel free to. No need to credit me, I'm happy if
+they're fixed.
+
 VirtualBox (Oracle)
 -------------------
 
@@ -31,15 +38,29 @@ Not reported due to poor responsiveness for my prior reports.
 Visiting data:text/html,ø autodetects the charset as ISO-8859-1 and prints Ã¸ instead. With the real
 character sitting right there in the title bar, mocking me.
 
-Going to any data: URI and drawing the URL bar contents to the tab list does nothing. Upon further
+Going to any data: URI and pulling the URL bar contents to the tab list does nothing. Upon further
 inspection, it's throwing a "NS_ERROR_DOM_BAD_URI: Access to restricted URI denied" error. The only
 thing that should be less restricted than data: is about:blank.
 
-Ubuntu (Canonical), or whoever made command-not-found
------------------------------------------------------
+.NET Foundation (Microsoft)
+---------------------------
+
+Not reported due to (1) requiring a CLA full of legalese I can barely read (2) seemingly requiring
+my real name, signature, postal address, and some other stuff I'm not giving to the company behind
+the Windows 10 privacy scare. Especially not when their privacy policy is an even bigger pile of
+legalese.
+
+[Reported but bot-rejected](https://github.com/dotnet/coreclr/pull/1644): Typoed Wikipedia as
+wikipedia, and forgot a link right in the main repo readme. (Maybe their humans will merge it
+anyways, since a copypasted link and a W obviously fails the
+[threshold of originality](https://en.wikipedia.org/wiki/Threshold_of_originality), but probably
+not.)
+
+Ubuntu (Canonical), or whoever their upstream for command-not-found is
+----------------------------------------------------------------------
 
 Not reported because it requires an account and I don't want to create yet another.
 
-`echo -e '\xC0'` throws a "'utf-8' codec can't encode character '\udcc0' in position 0: surrogates
-not allowed" exception. While I can't really expect any real suggestions from that, an exception is
-probably wrong way to handle it.
+Typing (or pasting) `\`echo -e '\xC0'\`` into a shell throws a 27-line error about "'utf-8' codec
+can't encode character '\udcc0' in position 0". While I can't really expect any real suggestions
+from that, exceptions aren't really the best solution. Where did DCC0 come from, anyways?
