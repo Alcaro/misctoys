@@ -45,23 +45,24 @@ thing that should be less restricted than data: is about:blank.
 .NET Foundation (Microsoft)
 ---------------------------
 
-Not reported due to (1) requiring a CLA full of legalese I can barely read (2) seemingly requiring
-my real name, signature, postal address, and some other stuff I'm not giving to the company behind
-the Windows 10 privacy scare. Especially not when their privacy policy is an even bigger pile of
-legalese.
+Not reported due to (1) requiring a CLA full of legalese I can barely read (2) the public sample CLA
+(which I assume is accurate) requiring my real name, signature, postal address, and some other stuff
+I'm not too eager to give to the company behind the Windows 10 privacy scare (3) their privacy
+policy being an even bigger pile of even less leglible legalese (4) their privacy policy not even
+mentioning the obvious collection of personal information going on around those CLAs.
 
-[Reported but bot-rejected](https://github.com/dotnet/coreclr/pull/1644): Typoed Wikipedia as
-wikipedia, and forgot a link right in the main repo readme. (Maybe their humans will merge it
-anyways, since a copypasted link and a W obviously fails the
-[threshold of originality](https://en.wikipedia.org/wiki/Threshold_of_originality), but probably
-not.)
+[Reported but bot-rejected](https://github.com/dotnet/coreclr/pull/1644): Contribution guide typos
+Wikipedia as wikipedia, and they forgot a link to the .NET Foundation forums right in the main repo
+readme. Maybe their humans will merge it anyways, since a copypasted link and a W obviously fails
+the [threshold of originality](https://en.wikipedia.org/wiki/Threshold_of_originality), but probably
+not.
 
-Ubuntu (Canonical), or whoever their upstream for command-not-found is
-----------------------------------------------------------------------
+Ubuntu (Canonical), or whoever their upstream for python3-commandnotfound is
+----------------------------------------------------------------------------
 
 Not reported because it requires an account and I don't want to create yet another.
 
-Typing (or pasting) ``` `echo -e '\xC0'` ``` into a shell throws a 27-line error about "'utf-8'
+Typing (or pasting) ``` `echo -e '\xC0'` ``` into a shell throws a 35-line error about "'utf-8'
 codec can't encode character '\udcc0' in position 0: surrogates not allowed". While I can't really
 expect any real suggestions from that, exceptions aren't really the best solution. Where did DCC0
 come from, anyways?
