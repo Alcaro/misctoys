@@ -61,6 +61,7 @@ Ubuntu (Canonical), or whoever their upstream for command-not-found is
 
 Not reported because it requires an account and I don't want to create yet another.
 
-Typing (or pasting) `\`echo -e '\xC0'\`` into a shell throws a 27-line error about "'utf-8' codec
-can't encode character '\udcc0' in position 0". While I can't really expect any real suggestions
-from that, exceptions aren't really the best solution. Where did DCC0 come from, anyways?
+Typing (or pasting) ``` `echo -e '\xC0'` ``` into a shell throws a 27-line error about "'utf-8'
+codec can't encode character '\udcc0' in position 0: surrogates not allowed". While I can't really
+expect any real suggestions from that, exceptions aren't really the best solution. Where did DCC0
+come from, anyways?
