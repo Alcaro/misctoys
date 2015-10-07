@@ -35,12 +35,12 @@ Firefox (Mozilla)
 
 Not reported due to poor responsiveness for my prior reports.
 
-Visiting data:text/html,ø autodetects the charset as ISO-8859-1 and prints Ã¸ instead. With the real
-character sitting right there in the title bar, mocking me.
+Visiting data:text/html,☃ autodetects the charset as ISO-8859-1 and prints â˜ƒ instead. With the
+real character sitting right there in the title bar, mocking me.
 
 Going to any data: URI and pulling the URL bar contents to the tab list does nothing. Upon further
-inspection, it's throwing a "NS_ERROR_DOM_BAD_URI: Access to restricted URI denied" error. The only
-thing that should be less restricted than data: is about:blank.
+inspection, it's throwing a "NS_ERROR_DOM_BAD_URI: Access to restricted URI denied" error. data:
+shouldn't be restricted, the only thing whose contents are more public than data: is about:blank.
 
 .NET Foundation (Microsoft)
 ---------------------------
@@ -66,3 +66,14 @@ Typing (or pasting) ``` `echo -e '\xC0'` ``` into a shell throws a 35-line error
 codec can't encode character '\udcc0' in position 0: surrogates not allowed". While I can't really
 expect any real suggestions from that, exceptions aren't really the best solution. Where did DCC0
 come from, anyways?
+
+Erlang Solutions
+----------------
+
+[At least one of these Erlang packages](https://www.erlang-solutions.com/downloads/download-erlang-otp)
+reports a dependency on libwxgtk3.0-0 or libwxgtk2.8-0. Unfortunately, dpkg defaults to the former,
+while it only actually works with the latter. Only an optional, and clearly uncommon,
+Erlang module depends on that, so it's understandable that it got missed, but still a bug.
+
+Not reported because the contact page points only to a community site with no obvious bug report
+mechanism, and to their physical offices. I'm not going to Stockholm to report a packaging bug.
