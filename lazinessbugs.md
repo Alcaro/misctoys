@@ -5,8 +5,11 @@ For various bugs which I have found in various programs, but have not reported, 
 unresponsive or user-hostile bug reporting systems. If you don't want my reports, I'm happy to
 oblige.
 
+The name "laziness bugs" is because it was originally true laziness. Then I started working down the
+list, but the name stuck. It doesn't really mean anything anymore.
+
 I try to report bugs through the official channels if available (or, if on GitHub and a fix is
-obvious, I submit a PR). For example, I've submitted about 30 bugs in WolframAlpha through the
+obvious, I submit a PR). For example, I've submitted about 30 bugs in Wolfram|Alpha through the
 feedback form at the bottom, several of which are reported fixed.
 
 If anyone reading this wants to report these bugs, feel free to. No need to credit me, I'm happy if
@@ -16,12 +19,13 @@ VirtualBox (Oracle)
 -------------------
 
 Not reported because reporting bugs requires an account, which wants my full, real name, and my
-"work title", whatever that is for a student. I consider this user hostile.
+"work title", whatever that is for a student. I consider this privileged information and therefore
+user hostile.
 
 With a Swedish keyboard layout, VirtualBox calls the default Host key HÖGER CRTL. The correct
 spelling is CTRL.
 
-Manual, section 9.30. "In the future it might be possible to configure dedicated actions but for
+Manual, section 9.30: "In the future it might be possible to configure dedicated actions but for
 there is only a warning in the log file." Missing a "now" in "but for there".
 
 Manual, section 9.20.10 and 9.20.11: They're identical. I suspect one of them should refer to
@@ -64,16 +68,19 @@ Not reported because it requires an account and I don't want to create yet anoth
 
 Typing (or pasting) ``` `echo -e '\xC0'` ``` into a shell throws a 35-line error about "'utf-8'
 codec can't encode character '\udcc0' in position 0: surrogates not allowed". While I can't really
-expect any real suggestions from that, exceptions aren't really the best solution. Where did DCC0
-come from, anyways?
+expect any real suggestions from that, walls of text bigger than my terminal aren't really the best
+solution. Where did DCC0 come from, anyways?
+
+(Originally found by typoing something in PuTTY. Its default charset is ISO-8859-1; combine that
+with a Swedish keyboard, where we have åäö, invalid UTF-8 is rather easy.)
 
 Erlang Solutions
 ----------------
+
+Not reported because the contact page points only to a community site with no obvious bug report
+mechanism, and to their physical offices. I'm not going to Stockholm to report bugs.
 
 [At least one of these Erlang packages](https://www.erlang-solutions.com/downloads/download-erlang-otp)
 reports a dependency on libwxgtk3.0-0 or libwxgtk2.8-0. Unfortunately, dpkg defaults to the former,
 while it only actually works with the latter. Only an optional, and clearly uncommon,
 Erlang module depends on that, so it's understandable that it got missed, but still a bug.
-
-Not reported because the contact page points only to a community site with no obvious bug report
-mechanism, and to their physical offices. I'm not going to Stockholm to report a packaging bug.
