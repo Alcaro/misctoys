@@ -84,3 +84,15 @@ mechanism, and to their physical offices. I'm not going to Stockholm to report b
 reports a dependency on libwxgtk3.0-0 or libwxgtk2.8-0. Unfortunately, dpkg defaults to the former,
 while it only actually works with the latter. Only an optional, and clearly uncommon,
 Erlang module depends on that, so it's understandable that it got missed, but still a bug.
+
+Gmail (Google)
+--------------
+
+Not reported because I can't find the bug report form. All I find, both in Settings, Help and
+googling, is irrelevant nonsense and a few Google Groups posts that no longer point anywhere.
+
+Attach a file of size zero. It's too big and ends up on Google Drive.
+
+Then the Drive form is a blob of <div contenteditable="false" blah blah>. In text form. It shows up
+as a big blob of technobabble for the recipient, even if the recipient is also on Gmail. (Didn't
+test if this Drive form is screwed up if the file really is that big.)

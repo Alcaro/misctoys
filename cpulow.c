@@ -1,4 +1,5 @@
 //This program sits in the background and listens for a certain keyboard event, and flips the CPU frequency in the power options.
+//On another keyboard event, it turns off the screen, as if the computer has been inactive for a few minutes. No screensaver because screens no longer need saving.
 //Win32 only, only tested on 7.
 
 #define _WIN32_WINNT 0x0601
@@ -25,7 +26,6 @@ int GetCPUSpeed()
 	PowerGetActiveScheme(NULL, &CurrentScheme);
 	GUID MaxCpuFreq={0xbc5038f7, 0x23e0, 0x4960, {0x96,0xda,0x33,0xab,0xaf,0x59,0x35,0xec}};
 	PowerReadACValue(NULL, CurrentScheme, &GUID_PROCESSOR_SETTINGS_SUBGROUP, &MaxCpuFreq, NULL, (LPBYTE)&out, &size);
-	PowerSetActiveScheme(NULL, CurrentScheme);
 	LocalFree(CurrentScheme);
 	return out;
 }
