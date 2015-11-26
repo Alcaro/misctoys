@@ -72,7 +72,7 @@ expect any real suggestions from that, walls of text bigger than my terminal are
 solution. Where did DCC0 come from, anyways?
 
 (Originally found by typoing something in PuTTY. Its default charset is ISO-8859-1; combine that
-with a Swedish keyboard, where we have åäö, invalid UTF-8 is rather easy.)
+with a Swedish keyboard, where we have åäö, and you get invalid UTF-8 quite fast.)
 
 Erlang Solutions
 ----------------
@@ -93,6 +93,6 @@ googling, is irrelevant nonsense and a few Google Groups posts that no longer po
 
 Attach a file of size zero. It's too big and ends up on Google Drive.
 
-Then the Drive form is a blob of <div contenteditable="false" blah blah>. In text form. It shows up
+Then the Drive form is a blob of \<div contenteditable="false" blah blah>. In text form. It shows up
 as a big blob of technobabble for the recipient, even if the recipient is also on Gmail. (Didn't
 test if this Drive form is screwed up if the file really is that big.)
