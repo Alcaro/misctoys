@@ -2,8 +2,8 @@ Laziness bugs
 =============
 
 For various bugs which I have found in various programs, but have not reported, due to absent,
-unresponsive or user-hostile bug reporting systems. If you don't want my reports, I'm happy to
-oblige.
+unresponsive, broken or otherwise user-hostile bug reporting systems. If you don't want my reports,
+I'm happy to oblige.
 
 The name "laziness bugs" is because it was originally true laziness. Then I started working down the
 list, but the name stuck. It doesn't really mean anything anymore.
@@ -12,8 +12,11 @@ I try to report bugs through the official channels if available (or, if on GitHu
 obvious, I submit a PR). For example, I've submitted about 30 bugs in Wolfram|Alpha through the
 feedback form at the bottom, several of which are reported fixed.
 
-If anyone reading this wants to report these bugs, feel free to. No need to credit me, I'm happy if
-they're fixed.
+If anyone reading this knows of a better report mechanism than I could find, feel free to submit
+these. No need to credit me, I'm happy if they're fixed.
+
+If anyone reading this knows of any bugs you haven't found how to report, you're welcome to toss
+them my way. It won't lead anywhere, but it won't do any harm either.
 
 VirtualBox (Oracle)
 -------------------
@@ -64,7 +67,8 @@ not.
 Ubuntu (Canonical), or whoever their upstream for python3-commandnotfound is
 ----------------------------------------------------------------------------
 
-Not reported because it requires an account and I don't want to create yet another.
+Not reported because it requires an account and I don't want to create yet another. And I'm not sure
+if they're upstream at all.
 
 Typing (or pasting) ``` `echo -e '\xC0'` ``` into a shell throws a 35-line error about "'utf-8'
 codec can't encode character '\udcc0' in position 0: surrogates not allowed". While I can't really
@@ -94,5 +98,6 @@ googling, is irrelevant nonsense and a few Google Groups posts that no longer po
 Attach a file of size zero. It's too big and ends up on Google Drive.
 
 Then the Drive form is a blob of \<div contenteditable="false" blah blah>. In text form. It shows up
-as a big blob of technobabble for the recipient, even if the recipient is also on Gmail. (Didn't
-test if this Drive form is screwed up if the file really is that big.)
+as a big blob of technobabble for the recipient, even if the recipient is also on Gmail (it also
+shows up in the attachment list, but only on the Gmail web interface). Didn't test if this Drive
+form is screwed up if the file really is that big, or only for zero-size files.
