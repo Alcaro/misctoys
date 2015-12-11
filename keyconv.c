@@ -18,8 +18,23 @@
 //  ULONG  ExtraInformation;
 //} RAWKEYBOARD, *PRAWKEYBOARD, *LPRAWKEYBOARD;
 
+FILE* outfile;
+char outbuf[4096];
+int outbufpos;
+void out(char ch)
+{
+	if (ch) outbuf[outbufpos++]=ch;
+	if (outbufpos==sizeof(outbuf) || !ch)
+	{
+		fwrite(outbuf, 1,outbufpos, outfile);
+		outbufpos=0;
+	}
+}
+
 int main(int argc, char * argv[])
 {
+	outfile=stdout;
+	
 	FILE* raw=fopen(argv[1] ? argv[1] : "keylog.bin", "rb");
 	typedef struct event_t {
 		DWORD time; // timestamp is in milliseconds, likely since device boot
@@ -47,7 +62,7 @@ int main(int argc, char * argv[])
 	{
 		keymaps[0][i]=i;
 	}
-	memcpy(&keymaps[1]['0'], "=!\"#\xF8%&/()", 10);
+	memcpy(&keymaps[1]['0'], "=!\"#\0%&/()", 10);
 	keymaps[0][' ']=' ';
 	keymaps[1][' ']=' ';
 	
@@ -68,13 +83,17 @@ int main(int argc, char * argv[])
 	keymaps[0][VK_OEM_7]=0x84; keymaps[1][VK_OEM_7]=0x8E; //ä
 	keymaps[0][VK_OEM_102]='<'; keymaps[1][VK_OEM_102]='>'; keymaps[2][VK_OEM_102]='|';
 	
-	keymaps[0][VK_RETURN]='\n';
-	keymaps[1][VK_RETURN]='\n';
+	keymaps[0][VK_RETURN]=0x14;//¶
+	keymaps[1][VK_RETURN]=0x14;
+	keymaps[0][VK_BACK]=0x1B;//<-
+	keymaps[1][VK_BACK]=0x1B;
+	keymaps[0][VK_TAB]=0x1A;//->
+	keymaps[1][VK_TAB]=0x1A;
 	
-	keymaps[0][VK_LEFT]=0x1B;
-	keymaps[0][VK_UP]=0x18;
-	keymaps[0][VK_RIGHT]=0x1A;
-	keymaps[0][VK_DOWN]=0x19;
+	keymaps[0][VK_LEFT]=0x11;
+	keymaps[0][VK_UP]=0x1E;
+	keymaps[0][VK_RIGHT]=0x10;
+	keymaps[0][VK_DOWN]=0x1F;
 	
 	keymaps[0][VK_SHIFT]=-1;
 	keymaps[1][VK_SHIFT]=-1;
@@ -104,7 +123,7 @@ int main(int argc, char * argv[])
 			int ch=0;
 			if (vk<=0x100) ch=keymaps[altgr*2+shift][vk];
 			if (ch==0) ch=0xDB;//in codepage 850, this is U+2588 █
-			if (ch!=-1) putchar(ch);
+			if (ch!=-1) out(ch);
 		}
 		//printf("\tvk=%.2X sc=%.2X dn=%i\n",ev->key.VKey,ev->key.MakeCode, down);
 //printf("\t%i %.4X %.4X %.4X %.4X %.8X %.8X\n",
@@ -119,4 +138,6 @@ int main(int argc, char * argv[])
 		st_vk[ev->key.VKey]=down;
 		st_sc[ev->key.MakeCode]=down;
 	}
+	
+	out(0);
 }

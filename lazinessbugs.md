@@ -10,10 +10,12 @@ list, but the name stuck. It doesn't really mean anything anymore.
 
 I try to report bugs through the official channels if available (or, if on GitHub and a fix is
 obvious, I submit a PR). For example, I've submitted about 30 bugs in Wolfram|Alpha through the
-feedback form at the bottom, several of which are reported fixed.
+feedback form at the bottom, several of which are reported fixed, and several more of which were
+fixed without telling me.
 
-If anyone reading this knows of a better report mechanism than I could find, feel free to submit
-these. No need to credit me, I'm happy if they're fixed.
+If anyone reading this knows of better report mechanisms than I could find, feel free to submit
+these bugs there. No need to credit me, I'm happy if they're fixed. (But do ping me about it, so I
+can keep this list up to date.)
 
 If anyone reading this knows of any bugs you haven't found how to report, you're welcome to toss
 them my way. It won't lead anywhere, but it won't do any harm either.
