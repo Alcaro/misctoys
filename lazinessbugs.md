@@ -51,6 +51,8 @@ Going to any data: URI and pulling the URL bar contents to the tab list does not
 inspection, it's throwing a "NS_ERROR_DOM_BAD_URI: Access to restricted URI denied" error. data:
 shouldn't be restricted, the only thing whose contents are more public than data: is about:blank.
 
+![Downloaded file: 411.2744140625KB](https://github.com/Alcaro/misctoys/blob/master/firefoxbug.png)
+
 .NET Foundation (Microsoft)
 ---------------------------
 
