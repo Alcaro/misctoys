@@ -5,7 +5,7 @@ sorted by date of first known start
 |bsnes-qt     | unknown (Themaister?)    | abandoned or canceled    | based on bsnes v072, used libsnes
 |SSNES        | Themaister, Squarepusher | renamed, now RetroArch   | used libsnes
 |lsnes        | someone from TASVideos?  | released, active?        | started as libsnes, unknown if it got upgraded
-|LMSW         | Alcaro                   | released, abandoned      | plugin for a level editor http://s373.photobucket.com/user/alcaroops/media/clip0003.mp4.html
+|LMSW         | Alcaro                   | released, abandoned      | [plugin for a level editor](http://s373.photobucket.com/user/alcaroops/media/clip0003.mp4.html)
 |RetroArch    | Squarepusher, Themaister | released, active         | most fully featured, main driver for libretro expansions, most supported platforms, focused on HTPC-style setups
 |XBMC / RetroPlayer  | garbear, others   | beta, active             | built inside a video player (but ffmpeg is a video player in libretro, so it's fair)
 |ZMZ          | Alcaro                   | released, abandoned      | based on ZSNES' GUI
