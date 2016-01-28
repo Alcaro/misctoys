@@ -15,5 +15,5 @@ sorted by date of first known start
 |nameless     | kekun                    | no recent news           | gtk3 only
 |Arcan        | letoram                  | no recent news           | seems to be an entire window manager
 |Phoenix      | Druage, athairus, others | active                   | Qt5, was previously a RetroArch launcher named Pantheon
-|AnarchyArcade  | Unknown, only calls himself AArcade  | dead       | Focused on virtual reality setups
+|AnarchyArcade  | Unknown, only calls himself AArcade  | [http://store.steampowered.com/app/266430/](on Steam) | Focused on virtual reality setups
 |[NanoArch](https://github.com/heuripedes/nanoarch)  | heuripedes aka enygmata  | finished?  | extremely minimalist, intended to show how libretro works
