@@ -2,7 +2,8 @@ There are many ways to vary your C/C++/etc coding standards. Tab width, space af
 underscores/CamelCase, etc.
 
 Most of the possibilities are either always resolved the same way (whether to indent), or I don't
-really care (what the tab width is).
+really care (what the tab width is). It's somewhat silly that there's no universally agreed-upon
+standard, but that's what happens when opinions come into the game.
 
 But there is one I care more about; not enough to whine about, but I have to consciously think of
 it, rather than instantly inferring it from the surrounding code.
@@ -15,8 +16,8 @@ int * baz;
 int*quux;
 
 I have never seen the fourth one outside IOCCC and 'echo foo bar | gcc', which don't need coding
-standards; the third is also rare (I use it for arrays, bar for non-arrays). But the first two are
-roughly equally common.
+standards; the third is also rare (I use it for arrays, and #2 for non-arrays). But the first two
+are roughly equally common.
 
 At a first glance, the language leads you towards the first one: int foo[10]; int *bar = foo; -
 they're both attached to the name, not the base type. char* foo, bar; is most likely a bug;
@@ -52,7 +53,7 @@ The variable is named bar. It is of type int*. Anything else is hiding informati
 
 
 I'll be glad to hear from anyone who disagrees, via GitHub issue or email to
-<printf("%s@muncher%cse", "floating", 0x2E);>; I believe others' opinions are not wrong, even if
+<printf("%s@muncher%cse", "floating", 0x2E)>; I believe others' opinions are not wrong, even if
 different. I often can't see how you reached that conclusion, but I believe there is a logical path
 to that end, and I want to know how others think before dismissing it; perhaps I'm the one who's
 wrong. (Or if this managed to change your opinion, that's also welcome!)
