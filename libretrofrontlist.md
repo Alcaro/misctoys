@@ -12,7 +12,7 @@ sorted by date of first known start
 |minir        | Alcaro                   | no recent news           | win32/gtk3/other?, focused on WIMP setups
 |nameless     | mudlord                  | canceled?                | WTL, statically linked core
 |nameless     | 4chan         | no recent news, nor any news at all | unknown
-|nameless     | kekun                    | no recent news           | gtk3 only
+|GNOME Games  | kekun, others?           | [going fairly well](https://wiki.gnome.org/Design/Playground/Games) | gtk3 only
 |Arcan        | letoram                  | no recent news           | seems to be an entire window manager
 |Phoenix      | Druage, athairus, others | active                   | Qt5, was previously a RetroArch launcher named Pantheon
 |AnarchyArcade  | Unknown, only calls himself AArcade  | [http://store.steampowered.com/app/266430/](on Steam) | Focused on virtual reality setups
