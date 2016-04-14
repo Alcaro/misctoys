@@ -105,3 +105,22 @@ Then the Drive form is a blob of \<div contenteditable="false" blah blah>. In te
 as a big blob of technobabble for the recipient, even if the recipient is also on Gmail (it also
 shows up in the attachment list, but only on the Gmail web interface). Didn't test if this Drive
 form is screwed up if the file really is that big, or only for zero-size files.
+
+Python3 chardet (Ian Cordasco or Dan Blanchard)
+-----------------------------------------------
+
+Not reported because [you tell me where the bug report form is](https://pypi.python.org/pypi/chardet).
+That PyPI Bug Reports link doesn't count, it's for bugs in PyPI itself.
+
+```
+$ python3
+>>> import chardet
+>>> chardet.detect(bytearray())
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "/usr/lib/python3/dist-packages/chardet/__init__.py", line 25, in detect
+    raise ValueError('Expected a bytes object, not a unicode object')
+ValueError: Expected a bytes object, not a unicode object
+```
+
+That's not a unicode object.
