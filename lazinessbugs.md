@@ -124,3 +124,12 @@ ValueError: Expected a bytes object, not a unicode object
 ```
 
 That's not a unicode object.
+
+Visual Studio (Microsoft)
+-------------------------
+
+Reported about six of those via the built-in reporter. No response, and they don't show up on search
+engines either.
+
+I found a huge number of bugs in this product, so I'm shoving them off to
+[their own file](vstudiobugs.md).
