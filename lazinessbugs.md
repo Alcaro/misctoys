@@ -10,8 +10,7 @@ list, but the name stuck. It doesn't really mean anything anymore.
 
 I try to report bugs through the official channels if available (or, if on GitHub and a fix is
 obvious, I submit a PR). For example, I've submitted about 30 bugs in Wolfram|Alpha through the
-feedback form at the bottom, several of which are reported fixed, and several more of which were
-fixed without telling me.
+feedback form at the bottom, most of which were fixed.
 
 If anyone reading this knows of better report mechanisms than I could find, feel free to submit
 these bugs there. No need to credit me, I'm happy if they're fixed. (But do ping me about it, so I
@@ -50,6 +49,13 @@ real character sitting right there in the title bar, mocking me.
 Going to any data: URI and pulling the URL bar contents to the tab list does nothing. Upon further
 inspection, it's throwing a "NS_ERROR_DOM_BAD_URI: Access to restricted URI denied" error. data:
 shouldn't be restricted, the only thing whose contents are more public than data: is about:blank.
+
+Since version 46.0 (the GTK3 switch), many buttons (the Page Bookmarked, for example) shrank to
+about half height.
+
+Version 46 also made the bottom pixel of a large dropdown menu (for example a bookmark folder with
+100 entries) non-interactive, so I can't drag a tab into a huge folder and wave it around until I
+reach the bottom.
 
 ![Downloaded file: 411.2744140625KB](https://github.com/Alcaro/misctoys/blob/master/firefoxbug.png)
 
@@ -129,7 +135,7 @@ Visual Studio (Microsoft)
 -------------------------
 
 Reported about six of those via the built-in reporter. No response, and they don't show up on search
-engines either.
+engines either, so I'll just rant here instead.
 
 I found a huge number of bugs in this product, so I'm shoving them off to
 [their own file](vstudiobugs.md).
