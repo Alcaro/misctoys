@@ -104,3 +104,23 @@ class AwaitNull
 //Expected: One entry pointing to both projects, the same way errors do.
 //Actual: Two entries, one for each project. Despite both going to the same place.
 ```
+
+```csharp
+class Program
+{
+    static void Main(string[] args)
+    {
+        {
+            int foo = 42;
+        }
+        {
+            string foo = "Test";
+            //Put a breakpoint here, or that brace down there. VS shows the values of local
+            // variables if you hover the mouse on them; do that to 'int foo' up there.
+            //Expected results: 'int foo' is out of scope and no longer has a value.
+            // Alternatively, show the value it last had (42), but that's overkill.
+            //Actual: It's got the value 'Test'. Integers don't have that value.
+        }
+    }
+}
+```
