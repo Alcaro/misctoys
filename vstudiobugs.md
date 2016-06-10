@@ -100,9 +100,10 @@ class AwaitNull
 ```
 
 ```csharp
-//TODO: Put this file in two projects in the same solution, the look at the Task List.
+//FIXME: Put this file in two projects in the same solution, then look at the Task List.
 //Expected: One entry pointing to both projects, the same way errors do.
 //Actual: Two entries, one for each project. Despite both going to the same place.
+//The bug is also reproducible with Find All References.
 ```
 
 ```csharp
