@@ -10,11 +10,13 @@ sorted by date of first known start
 |XBMC / RetroPlayer  | garbear, others   | beta, active             | built inside a video player (but ffmpeg is a video player in libretro, so it's fair)
 |ZMZ          | Alcaro                   | released, abandoned      | based on ZSNES' GUI
 |minir        | Alcaro                   | no recent news           | win32/gtk3/other?, focused on WIMP setups
-|nameless     | mudlord                  | canceled?                | WTL, statically linked core
+|nameless     | mudlord                  | canceled                 | WTL, statically linked core
 |nameless     | 4chan         | no recent news, nor any news at all | unknown
 |GNOME Games  | kekun, others?           | [going fairly well](https://wiki.gnome.org/Design/Playground/Games) | gtk3 only
 |Arcan        | letoram                  | no recent news           | seems to be an entire window manager
 |Phoenix      | Druage, athairus, others | active                   | Qt5, was previously a RetroArch launcher named Pantheon
-|AnarchyArcade  | Unknown, only calls himself AArcade  | [on Steam](http://store.steampowered.com/app/266430/) | Focused on virtual reality setups
+|AnarchyArcade | SM_Sith_Lord            | [on Steam](http://store.steampowered.com/app/266430/) | Focused on virtual reality setups
 |[NanoArch](https://github.com/heuripedes/nanoarch)  | heuripedes aka enygmata  | finished?  | extremely minimalist, intended to show how libretro works
 |nameless     | Leiradel                 | ?                        | written in Lua
+|[EmuVR](http://www.emuvr.net/about/) | website lags too much for me to figure that out | ? | another virtual reality setup, probably
+|New Retro Arcade  | Digital Cyber Cherries  | released  | virtual reality again (doesn't acknowledge libretro, and costs $30, so not recommended)
