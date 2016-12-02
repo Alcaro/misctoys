@@ -1,0 +1,38 @@
+Stuff I want for C++17 (or any other upcoming version)
+
+Compile-time reflection
+ arlib/serialize.h's SERIALIZE is small, but easy to forget and hard to debug. Typos easily turn into 3000-line errors.
+
+Coroutines
+ libco completely shreds the return address predictor, I want to know how much faster bsnes would be with compiler-supported coroutines.
+
+Partial classes
+ Several Arlib classes (mainly the GUI widgets) are created, accessed and destructed only in one file, other than member function calls.
+ There are several ways to implement such objects:
+ - Member functions are virtual
+  - extra boilerplate
+  - extra overhead
+ - Member variables are declared in the header
+  - #include <windows.h>/etc everywhere
+  - fails interface-implementation separation
+  - headers become huge if object has multiple implementations (the widgets do)
+ - Member variables are in a private structure
+  - extra boilerplate
+  - extra overhead
+ - No member functions, C-style only
+  - makes callers really ugly
+ - Language extension
+  - doesn't exist (outside Microsoft's C++/CX, and even then, not for normal classes)
+  - lack of compiler support
+ All options have drawbacks. But one's drawbacks will eventually disappear.
+
+if constexpr
+ Currently, I have this in Arlib global.h:
+ if (sizeof(in)>4) in|=in>>8>>8>>8>>8; // double shift to shut up bitshift-out-of-range warnings
+ Anything that shuts up that warning without repeating the operator is an improvement.
+
+automatic move in returns
+ because why isn't that default already, free performance boost
+
+Other proposals don't interest me. They're useful for some purposes, but not what I want.
+I'm not interested in library improvements. The existing ones feel clunky and heavyweight, and new ones most likely act similarly. I'd rather write my own.
