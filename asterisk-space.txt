@@ -16,15 +16,15 @@ int * baz;
 int*quux;
 
 I have never seen the fourth one outside IOCCC and 'echo foo bar | gcc', which don't need coding
-standards; the third is also rare (I use it for arrays, and #2 for non-arrays). But the first two
-are roughly equally common.
+standards; the third is also rare. But the first two are roughly equally common.
 
 At a first glance, the language leads you towards the first one: int foo[10]; int *bar = foo; -
 they're both attached to the name, not the base type. char* foo, bar; is most likely a bug;
 char *foo, bar; is far more likely correct. int *foo = &bar; *foo = 4; - there's some pretty nice
-symmetry here.
+symmetry here (often called use matches declaration).
 
-But I believe that is a mistake. The variable is named foo, not *foo; the type is int*, not int.
+But I believe that is a mistake. The variable is not named *foo, it's named foo. The type is int*,
+not int.
 
 Encoding type information in the start of a variable isn't unusual; Fortran uses 'int' for anything
 starting with IJKLMN, while any other prefix is 'float'. Systems Hungarian Notation is similar.
@@ -37,9 +37,10 @@ that's another issue.) Enforced naming conventions are only a few extra keystrok
 to keep track of.
 
 And even if you do prefix your pointers with an asterisk, you run into all those situations where
-the asterisk suddenly shouldn't be there. Passing a pointer to a function? No asterisk. Pointer
-points to a struct? There's a reason operator-> exists. Or if it's an array, better treat it like an
-array and use operator[]; pointer math is easy to get wrong.
+the asterisk suddenly shouldn't be there. Passing a pointer to a function? No asterisk. Void
+pointer? Now you need either a cast between asterisk and name (the variable certainly isn't named
+*(int *)foo), or a variable assignment (no asterisk). Pointer to a struct? That's operator->. Or if
+it's an array, better treat it like an array and use operator[]; pointer math is easy to get wrong.
 
 I believe the only situations where unary operator* is relevant are pointer math (often discouraged)
 and out parameters (too rare to direct your coding style).
@@ -49,7 +50,7 @@ on the left side, and where references act exactly like pointers with automatic 
 every use (hence ampersand is not part of the name and belongs on the left). Pointers usually (but
 not always, for example Clang/LLVM) follow suit.
 
-The variable is named bar. It is of type int*. Anything else is hiding information from yourself.
+The variable is named foo. It is of type int*. Anything else is hiding information from yourself.
 
 
 I'll be glad to hear from anyone who disagrees, via GitHub issue or email to
