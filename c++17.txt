@@ -1,7 +1,8 @@
-Stuff I want for C++17 (or any other upcoming version)
+Stuff I want in C++17 (or any other upcoming version)
 
 Compile-time reflection
- arlib/serialize.h's SERIALIZE is small, but easy to forget and hard to debug. Typos easily turn into 3000-line errors.
+ arlib/serialize.h's SERIALIZE is simple, but easy to forget and hard to debug. Typos easily turn into 3000-line errors.
+  Though perhaps reflection errors wouldn't be much better... At least it'd give me a more powerful interface than SERIALIZE.
 
 Coroutines
  libco completely shreds the return address predictor, I want to know how much faster bsnes would be with compiler-supported coroutines.
@@ -25,6 +26,8 @@ Partial classes
   - doesn't exist (outside Microsoft's C++/CX, and even then, not for normal classes)
   - lack of compiler support
  All options have drawbacks. But one's drawbacks will eventually disappear.
+ ...actually, I only need to define member functions without defining the member variables or sizeof, not splitting the member variables.
+  This is simpler than partial class. Perhaps it's an interface declaration?
 
 if constexpr
  Currently, I have this in Arlib global.h:
@@ -34,5 +37,6 @@ if constexpr
 automatic move in returns
  because why isn't that default already, free performance boost
 
-Other proposals don't interest me. They're useful for some purposes, but not what I want.
-I'm not interested in library improvements. The existing ones feel clunky and heavyweight, and new ones most likely act similarly. I'd rather write my own.
+Other proposals don't interest me. They're useful for some purposes, but not for me.
+I'm not interested in library improvements. The existing ones feel clunky and heavyweight, and new
+ ones most likely act similarly. I'd rather write my own.
