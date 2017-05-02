@@ -1,7 +1,7 @@
 Visual Studio laziness bugs
 ===========================
 
-All were found in Visual Studio 2015 Update 1 or Update 2.
+All were found in Visual Studio 2015 Update 1 or Update 2, last verified May 2016.
 
 ```csharp
 using System.Threading.Tasks;
