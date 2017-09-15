@@ -56,14 +56,29 @@ Upon further inspection, it's throwing a "NS_ERROR_DOM_BAD_URI: Access to restri
 error. data: shouldn't be restricted, the only thing whose contents are more public than data: is
 about:blank.
 
-(May 2016) Since version 46.0 (the GTK3 switch), many buttons (the Page Bookmarked, for example)
-shrank to about half height.
+(May 2016) Since version 46.0 (the GTK3 switch), many buttons (Page Bookmarked, for example) shrank
+to about half height.
 
 (May 2017) Version 46 also made the bottom pixel of a large dropdown menu (for example a bookmark
 folder with 100 entries) non-interactive, so I can't drag a tab into a huge folder and wave it
 around until I reach the bottom.
 
 (Dec 2015) ![Downloaded file: 411.2744140625KB](https://github.com/Alcaro/misctoys/blob/master/firefoxbug.png)
+
+(May 2017) Add `https://*.example.com` to the cookie whitelist. Result: `http://https`
+
+
+Thunderbird (Mozilla)
+-----------------
+
+Not reported due to poor responsiveness for my prior reports.
+
+(May 2017) Receive an email with only Return-Path, Delivered-To and Received headers; no title,
+recipient, sender or body. It marks the email account as having something unread, but doesn't show
+up anywhere and can't be marked read.
+
+(May 2017) On Lubuntu 17.04, the tabs under Preferences->Security are completely unstyled and don't
+look clickable.
 
 
 .NET Foundation (Microsoft)

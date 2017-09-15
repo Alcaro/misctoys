@@ -1,0 +1,30 @@
+Configuring Postfix to reject spam on Debian using a SpamAssassin milter
+------------------------------------------------------------------------
+
+I want Postfix to reject spam. And I want it rejected at the SMTP level, not a backscatter bounce.
+This was surprisingly annoying to google.
+
+This guide assumes Postfix is already installed and configured.
+
+1) Ignore other guides, most of them seem to yield backscatter
+
+2) Install SpamAssassin: apt-get install spamass-milter
+
+3) Teach Postfix what SpamAssassin is: append this to /etc/postfix/master.cf:
+spamassassin unix -     n       n       -       -       pipe
+  user=debian-spamd argv=/usr/bin/spamc -f -e /usr/sbin/sendmail -oi -f ${sender} ${recipient}
+(may be done automatically by the apt-get script, not sure)
+
+4) Tell Postfix to use the milter: append to /etc/postfix/main.cf:
+smtpd_milters = unix:/spamass/spamass.sock
+milter_connect_macros = j {daemon_name} v {if_name} _
+milter_default_action = tempfail
+
+5) If you've chmodded /etc/postfix/ to anything other than 755, ensure user debian-spamd:nobody can
+access it. You can change the username in master.cf, or set username to user=debian-spamd:some-group,
+but it rejects group postfix. Easiest shitty workaround: Set spamd as owner, chmod to 550, hope
+nobody else needs to read there.
+
+6) If you've got a strictly configured firewall, ensure debian-spamd and spamass-milter can access
+127.0.0.1:783/TCP
+(pretty sure only one of them is needed, but better not risk it)

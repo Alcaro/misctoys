@@ -2,8 +2,9 @@ There are many ways to vary your C/C++/etc coding standards. Tab width, space af
 underscores/CamelCase, etc.
 
 Most of the possibilities are either always resolved the same way (whether to indent), or I don't
-really care (what the tab width is). It's somewhat silly that there's no universally agreed-upon
-standard, but that's what happens when opinions come into the game.
+really care (what the tab width is, tab vs space; I have my preferences, of course, but I'll adapt
+to whatever the project does). It's somewhat silly that there's no universally agreed-upon standard,
+but that's what happens when opinions come into the game.
 
 But there is one I care more about; not enough to whine about, but I have to consciously think of
 it, rather than instantly inferring it from the surrounding code.
@@ -15,26 +16,26 @@ int* bar;
 int * baz;
 int*quux;
 
-I have never seen the fourth one outside IOCCC and 'echo foo bar | gcc', which don't need coding
+I never see the fourth one outside IOCCC and 'echo foo bar | gcc', which don't need coding
 standards; the third is also rare. But the first two are roughly equally common.
 
 At a first glance, the language leads you towards the first one: int foo[10]; int *bar = foo; -
 they're both attached to the name, not the base type. char* foo, bar; is most likely a bug;
 char *foo, bar; is far more likely correct. int *foo = &bar; *foo = 4; - there's some pretty nice
-symmetry here (often called use matches declaration).
+symmetry here (often called use-matches-declaration).
 
 But I believe that is a mistake. The variable is not named *foo, it's named foo. The type is int*,
 not int.
 
 Encoding type information in the start of a variable isn't unusual; Fortran uses 'int' for anything
 starting with IJKLMN, while any other prefix is 'float'. Systems Hungarian Notation is similar.
-(Apps Hungarian embeds more than the actual type and is thus irrelevant. Google them if you want to
-know more.)
+(Apps Hungarian embeds semantic information, not just the actual type, and isn't really relevant
+here. For more information, see <https://www.joelonsoftware.com/2005/05/11/making-wrong-code-look-wrong/>.)
 
 And people rebelled, for good reasons. The compiler (and, these days, your IDE) already knows the
 types and will point out if you make a mistake. (Unless you assign the integer 0 to a pointer, but
-that's another issue.) Enforced naming conventions are only a few extra keystrokes and another thing
-to keep track of.
+that's another issue.) Enforcing the type in the name is only a few extra keystrokes and another
+thing to keep track of.
 
 And even if you do prefix your pointers with an asterisk, you run into all those situations where
 the asterisk suddenly shouldn't be there. Passing a pointer to a function? No asterisk. Void
