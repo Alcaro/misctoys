@@ -169,3 +169,26 @@ engines either, so I'll just rant here instead.
 
 (May 2016) I found a huge number of bugs in this product, so I'm shoving them off to
 [their own file](vstudiobugs.md).
+
+
+GCC (GNU or FSF, not sure)
+--------------------------
+
+Not reported due to poor responsiveness for prior reports.
+
+(Mar 2018)
+```
+void x() { __builtin_unreachable(); }
+void y() { __builtin_unreachable(); }
+
+typedef void(*fptr)();
+__attribute__((noinline)) fptr noopt(fptr z) { return z; }
+
+bool lol1() { return x == y; }
+bool lol2() { return x == noopt(y); }
+```
+
+Under -O3, lol1 is optimized to 'return false', while x and y are optimized to zero bytes and lol2
+ends up returning true. Both true and false are fine, but inconsistency is a bug. The ideal fix
+would be to stick their labels in the middle of other functions; a much easier fix would be emitting
+some arbitrary single byte. ret would be the obvious choice, but int3 would be better.
