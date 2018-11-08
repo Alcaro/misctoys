@@ -27,4 +27,4 @@ nobody else needs to read there.
 
 6) If you've got a strictly configured firewall, ensure debian-spamd and spamass-milter can access
 127.0.0.1:783/TCP
-(pretty sure only one of them is needed, but better not risk it)
+(pretty sure only one of them need that port, but too lazy to figure out which)
