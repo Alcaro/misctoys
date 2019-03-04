@@ -35,27 +35,25 @@ here. For more information, see <https://www.joelonsoftware.com/2005/05/11/makin
 And people rebelled, for good reasons. The compiler (and, these days, your IDE) already knows the
 types and will point out if you make a mistake. (Unless you assign the integer 0 to a pointer, but
 that's another issue.) Enforcing the type in the name is only a few extra keystrokes and another
-thing to keep track of.
+thing to keep track of. Or in the case of Fortran, automatic typing means no variable
+predeclarations needed, but that means no typo checks either, and only two types ever.
 
 And even if you do prefix your pointers with an asterisk, you run into all those situations where
 the asterisk suddenly shouldn't be there. Passing a pointer to a function? No asterisk. Void
 pointer? Now you need either a cast between asterisk and name (the variable certainly isn't named
 *(int *)foo), or a variable assignment (no asterisk). Pointer to a struct? That's operator->. Or if
 it's an array, better treat it like an array and use operator[]; pointer math is easy to get wrong.
+Speaking of arrays, given int a[10], you can't use a[10] without getting undefined behavior.
 
 I believe the only situations where unary operator* is relevant are pointer math (often discouraged)
 and out parameters (too rare to direct your coding style).
 
-And then there's a whole other can of worms in C++, where the templates force you to put everything
-on the left side, and where references act exactly like pointers with automatic dereferencing on
-every use (hence ampersand is not part of the name and belongs on the left). Pointers usually (but
-not always, for example Clang/LLVM) follow suit.
+And then there's a whole other can of worms in C++, where templates force you to put everything on
+the left side (unique_ptr<int> foo acts mostly like int *foo, but the former is certainly not named
+*foo), and references too prefer to be on the left (given int &foo, you're unlikely to want &foo).
 
 The variable is named foo. It is of type int*. Anything else is hiding information from yourself.
 
 
-I'll be glad to hear from anyone who disagrees, via GitHub issue or email to
-<printf("%s@muncher%cse", "floating", 0x2E)>; I believe others' opinions are not wrong, even if
-different. I often can't see how you reached that conclusion, but I believe there is a logical path
-to that end, and I want to know how others think before dismissing it; perhaps I'm the one who's
-wrong. (Or if this managed to change your opinion, that's also welcome!)
+If you believe I'm missing some important detail, corrections and harassment welcome at GitHub
+issues or floating@muncher.se.
