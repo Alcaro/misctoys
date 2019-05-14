@@ -12,7 +12,7 @@ I try to report bugs through the official channels if available (or, if on GitHu
 obvious, I submit a PR). For example, I've submitted about 30 bugs in Wolfram|Alpha through the
 feedback form at the bottom, most of which were fixed.
 
-If anyone reading this knows of better report mechanisms than I could find feel free to submit
+If anyone reading this knows of better report mechanisms than I could find, feel free to submit
 these bugs there. No need to credit me, I'm happy if they're fixed.
 
 If anyone reading this knows of any bugs you haven't found how to report, you're welcome to toss
@@ -87,7 +87,7 @@ look clickable.
 Not reported due to (1) requiring a CLA full of legalese I can barely read (2) the public sample CLA
 (which I assume is accurate) requiring my real name, signature, postal address, and some other stuff
 I'm not too eager to give to the company behind the Windows 10 privacy scare (3) their privacy
-policy being an even bigger pile of even less leglible legalese (4) their privacy policy not even
+policy being an even bigger pile of even less legligible legalese (4) their privacy policy not even
 mentioning the obvious collection of personal information going on around those CLAs.
 
 (Sep 2015) [Reported but bot-rejected](https://github.com/dotnet/coreclr/pull/1644): Contribution
@@ -191,4 +191,21 @@ bool lol2() { return x == noopt(y); }
 Under -O3, lol1 is optimized to 'return false', while x and y are optimized to zero bytes and lol2
 ends up returning true. Both true and false are fine, but inconsistency is a bug. The ideal fix
 would be to stick their labels in the middle of other functions; a much easier fix would be emitting
-some arbitrary single byte. ret would be the obvious choice, but int3 would be better.
+some arbitrary single byte. ret would be the obvious choice, but int3 would be better (or ud2,
+though that's two bytes).
+
+(Mar 2019)
+Similarly,
+```
+#include <stdio.h>
+
+struct a {};
+void x(a a1, a a2) { printf("%p == %p? %d\n", &a1, &a2, &a1 == &a2); }
+
+int main()
+{
+    x(a(),a());
+}
+```
+
+gives a1 and a2 the same address, but claims they're not equal. (Only works for function arguments.)

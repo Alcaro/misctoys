@@ -4,11 +4,13 @@ Most (but not all) of these only allow speculative or out-of-order access of ina
 
 One (the only?) way to do that is to speculatively access different addresses depending on the stolen data, bringing it into the cache; then, when speculation aborts, measure timing to access those addresses, revealing what value the speculation touched.
 
-Other bugs often share a few steps with the above. All except Rosenbridge involve timing some operation that, on a simpler CPU, would be constant-time. Processors can be redesigned to block all of those; this is not considered a mitigation, though microcode update is.
+Other bugs often share a few steps with the above. All except Rosenbridge involve timing some operation that, on a simpler CPU, would be constant-time. Processors can be redesigned to block all of those; this leaves old machines vulnerable and is not considered a mitigation, though microcode update is.
+
+Most of those issues affect only Intel processors, some are cross-vendor. Rosenbridge is the only one not applicable on Intel.
 
 Additionally, depending on how you count, some of them may be trivial variants of each other with identical mitigations, not worth considering separate. I've split everything with a marketing name, but noted (my understanding of) how they relate to each other.
 
-| Marketing name | Public disclosure | Description | Link | Mitigated on Linux? |
+| Marketing name | Public disclosure | Description | Links | Mitigated on Linux? |
 | ---------- | ---------- | ---------- | ---------- | ---------- |
 | Spectre 1 - Bounds Check Bypass | 2018-01-03<br>CVE-2017-5753 | Constructions like `if (idx < limit) return foo[bar[idx]]` can, if the branch is mispredicted, leak the address of `foo[bar[too_big_index]]`, i.e. the value of `bar[too_big_index]` | https://meltdownattack.com/ | Partial mitigations exist, but work is still ongoing |
 | Spectre 2 - Branch Target Injection | 2018-01-03<br>CVE-2017-5715 | Indirect jumps (such as virtual function calls) can be manipulated into being mispredicted, allowing speculative execution of arbitrary code, allowing simulation of devices like the above | https://meltdownattack.com/ | Yes in userspace, retpoline; work ongoing in kernel |
@@ -30,5 +32,6 @@ Additionally, depending on how you count, some of them may be trivial variants o
 | PortSmash | 2018-11-02<br>CVE-2018-5407 | Yet another hyperthread leak, this one targetting how the processor can only execute a limited number of (e.g.) additions at once; doing too many reveals whether the sibling is also doing additions | https://seclists.org/oss-sec/2018/q4/123<br>https://github.com/bbbrumley/portsmash | Yes for everything without secret-dependent code flow (OpenSSL missed a spot, which this bug claims credit for finding, but I don't see why that wouldn't be equally doable with TLBleed or similar) |
 | Meltdown-PK, Meltdown-BR, many others | 2018-11-13<br>probably no CVE | Spectre versus [memory protection keys](https://lwn.net/Articles/643797/) and [MPX automatic bounds checks](https://lwn.net/Articles/582712/) - paper claims write access, but like Spectre 1.2, it's unclear how that helps (though the improper reads are bad enough) | https://arxiv.org/abs/1811.05441<br>https://arstechnica.com/gadgets/2018/11/spectre-meltdown-researchers-unveil-7-more-speculative-execution-attacks/ | Probably not; Intel says it is mitigated by existing defenses, but paper says otherwise; I'd rather trust the paper |
 | SPOILER | 2019-03-01<br>no CVE assigned | Cache miss timing can leak pages' physical addresses (or at least virt2phys(ptr1) xor virt2phys(ptr2)) | https://arxiv.org/pdf/1903.00446.pdf | The leak - no. But the only usecase of physical addresses I'm aware of is Rowhammer, which was discovered in 2014, and mitigation work has been ongoing since then. |
+| Microarchitectural Data Sampling<br>RIDL (MFBDS, MLPDS)<br>Fallout (MSBDS) | 2019-05-14<br>CVE-2018-12130<br>CVE-2018-12126<br>CVE-2018-12127<br>CVE-2019-11091 | No-longer-valid entries in various memory access buffers may be speculatively available, including across hyperthreads; no secret-dependent or mispredicted branches needed, EVERYTHING is vulnerable (except non-Intel) | https://www.redhat.com/en/blog/understanding-mds-vulnerability-what-it-why-it-works-and-how-mitigate-it<br>https://mdsattacks.com/ | Yes, microcode and kernel patch |
 
 Other named vulnerabilities, not listed above due to being older than Spectre: Rowhammer (2014-06-24), CacheBleed (2016-08-04), MemJam (2017-03-07)

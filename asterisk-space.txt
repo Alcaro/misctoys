@@ -17,42 +17,32 @@ int * baz;
 int*quux;
 
 I never see the fourth one outside IOCCC and 'echo foo bar | gcc', which don't need coding
-standards; the third is also rare. But the first two are roughly equally common.
+standards; the third is also rare (though I personally use it sometimes). But the first two are
+roughly equally common.
 
 At a first glance, the language leads you towards the first one: int foo[10]; int *bar = foo; -
 they're both attached to the name, not the base type. char* foo, bar; is most likely a bug;
 char *foo, bar; is far more likely correct. int *foo = &bar; *foo = 4; - there's some pretty nice
-symmetry here (often called use-matches-declaration).
+symmetry here.
 
 But I believe that is a mistake. The variable is not named *foo, it's named foo. The type is int*,
-not int.
+not int. int foo[10] should've been int[10] foo.
 
-Encoding type information in the start of a variable isn't unusual; Fortran uses 'int' for anything
-starting with IJKLMN, while any other prefix is 'float'. Systems Hungarian Notation is similar.
-(Apps Hungarian embeds semantic information, not just the actual type, and isn't really relevant
-here. For more information, see <https://www.joelonsoftware.com/2005/05/11/making-wrong-code-look-wrong/>.)
-
-And people rebelled, for good reasons. The compiler (and, these days, your IDE) already knows the
-types and will point out if you make a mistake. (Unless you assign the integer 0 to a pointer, but
-that's another issue.) Enforcing the type in the name is only a few extra keystrokes and another
-thing to keep track of. Or in the case of Fortran, automatic typing means no variable
-predeclarations needed, but that means no typo checks either, and only two types ever.
-
-And even if you do prefix your pointers with an asterisk, you run into all those situations where
-the asterisk suddenly shouldn't be there. Passing a pointer to a function? No asterisk. Void
-pointer? Now you need either a cast between asterisk and name (the variable certainly isn't named
-*(int *)foo), or a variable assignment (no asterisk). Pointer to a struct? That's operator->. Or if
-it's an array, better treat it like an array and use operator[]; pointer math is easy to get wrong.
-Speaking of arrays, given int a[10], you can't use a[10] without getting undefined behavior.
-
-I believe the only situations where unary operator* is relevant are pointer math (often discouraged)
-and out parameters (too rare to direct your coding style).
+Why? Because most of the time, you don't want the asterisk there. strlen? Passing variables takes no
+asterisk. Array? That's operator[]. Pointer to a struct? operator-> means one set of parentheses
+less. void pointer? Needs a cast; either inline (the variable certainly isn't named *(int *)foo), or
+as another variable (which may want unary operator*, but often becomes one of the other cases).
+Unary operator* does appear in a few contexts, but they're rare.
 
 And then there's a whole other can of worms in C++, where templates force you to put everything on
 the left side (unique_ptr<int> foo acts mostly like int *foo, but the former is certainly not named
-*foo), and references too prefer to be on the left (given int &foo, you're unlikely to want &foo).
+*foo), and references too prefer to be on the left (given int &foo, &foo is not an int).
 
 The variable is named foo. It is of type int*. Anything else is hiding information from yourself.
+
+I believe the C language is like this for historical reasons; when C was invented, every byte was
+expensive, and int foo,*bar,**baz; was a significant saving over int foo; int* bar; int** baz;.
+These days, that justification no longer exists.
 
 
 If you believe I'm missing some important detail, corrections and harassment welcome at GitHub
