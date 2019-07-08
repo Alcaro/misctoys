@@ -8,8 +8,8 @@ List of famous IP addresses
 127.x.x.x - localhost
 169.254.x.x - link-local address; your DHCP is broken
 172.16-31.x.x - private IP range, rarely used
-192.168.0-1.x - home LAN
-192.168.x.x - private IP range, usually home LAN, host-local virtual machine networking, and carrier-grade NAT
+192.168.0-1.x - private IP range, usually home LAN
+192.168.x.x - private IP range, usually host-local virtual machine networking and carrier-grade NAT
 224-239.x.x.x - broadcasts
 240-255.x.x.x - doesn't exist on the internet; ipv4-only servers behind Cloudflare see this source for ipv6 users
 255.255.255.255 - usually broadcast or an error
