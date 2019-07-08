@@ -1,17 +1,18 @@
 List of famous IP addresses
 
-0.0.0.0 - usually means 'any IP this machine has, including localhost', 'don't care, pick a suitable default', or an error
+0.0.0.0 - usually means 'any IP on this machine, including localhost', 'don't care, pick a suitable default', or an error
 0.x.x.x - doesn't exist on the internet
 1.1.1.1 - a DNS server, suitable for use by everyone, operated by CloudFlare
 8.8.8.8 - a DNS server, suitable for use by everyone, operated by Google
 10.x.x.x - private IP range, often used by large companies, including VPNs
 127.x.x.x - localhost
 169.254.x.x - link-local address; your DHCP is broken
-172.16.x.x through 172.31.x.x - private IP range, rarely used
-192.168.x.x - private IP range, usually home LANs (.0.x and .1.x only), host-local virtual machine networking, and carrier-grade NAT
-224.x.x.x through 239.x.x.x - broadcasts
-240.x.x.x through 255.x.x.x - doesn't exist on the internet, though Cloudflare's ipv6 to ipv4 bridge tends to use this
-255.255.255.255 - usually means 'every IP ever' or an error
+172.16-31.x.x - private IP range, rarely used
+192.168.0-1.x - home LAN
+192.168.x.x - private IP range, usually home LAN, host-local virtual machine networking, and carrier-grade NAT
+224-239.x.x.x - broadcasts
+240-255.x.x.x - doesn't exist on the internet; ipv4-only servers behind Cloudflare see this source for ipv6 users
+255.255.255.255 - usually broadcast or an error
 
 ::1 - IPv6 localhost
 2xxx:x:x:x:x:x:x:x - publically accessible IPv6 address
