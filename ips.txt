@@ -1,0 +1,15 @@
+List of famous IP addresses
+
+0.0.0.0 - usually means 'any IP this machine has, including localhost', sometimes 'don't care, pick a suitable default'
+0.x.x.x - unroutable
+1.1.1.1 - a DNS server, suitable for use by everyone, operated by CloudFlare
+8.8.8.8 - a DNS server, suitable for use by everyone, operated by Google
+10.x.x.x - private IP range, often used by large companies, including VPNs
+127.x.x.x - localhost
+169.254.x.x - link-local address; your DHCP is broken
+172.16.x.x through 172.31.x.x - private IP range, rarely used
+192.168.x.x - private IP range, usually home LANs (0.x and 1.x only), host-local virtual machine networking, and carrier-grade NAT
+
+::1 - IPv6 localhost
+2xxx:x:x:x:x:x:x:x - publically accessible IPv6 address
+fe80:x:x:x:x:x:x:x - link-local IPv6 address; your machine is misconfigured

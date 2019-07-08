@@ -2,8 +2,8 @@ There are many ways to vary your C/C++/etc coding standards. Tab width, space af
 underscores/CamelCase, etc.
 
 Most of the possibilities are either always resolved the same way (whether to indent), or I don't
-really care (what the tab width is, tab vs space; I have my preferences, of course, but I'll adapt
-to whatever the project does). It's somewhat silly that there's no universally agreed-upon standard,
+really care (tab vs space, space after if, etc; I have my preferences, of course, but I'll adapt to
+whatever the project does). It's somewhat silly that there's no universally agreed-upon standard,
 but that's what happens when opinions come into the game.
 
 But there is one I care more about; not enough to whine about, but I have to consciously think of
@@ -28,11 +28,11 @@ symmetry here.
 But I believe that is a mistake. The variable is not named *foo, it's named foo. The type is int*,
 not int. int foo[10] should've been int[10] foo.
 
-Why? Because most of the time, you don't want the asterisk there. strlen? Passing variables takes no
-asterisk. Array? That's operator[]. Pointer to a struct? operator-> means one set of parentheses
-less. void pointer? Needs a cast; either inline (the variable certainly isn't named *(int *)foo), or
-as another variable (which may want unary operator*, but often becomes one of the other cases).
-Unary operator* does appear in a few contexts, but they're rare.
+Why? Because most of the time, you don't want the asterisk. Array? You probably want operator[]
+instead. strlen? Passing variables takes no asterisk. Pointer to a struct? That's usually
+operator->. void pointer? Needs a cast; either inline (the variable certainly isn't named
+*(int *)foo), or as another variable (which doesn't necessarily want unary operator* either). Unary
+operator* does appear sometimes, but it's too rare to dictate the coding style elsewhere.
 
 And then there's a whole other can of worms in C++, where templates force you to put everything on
 the left side (unique_ptr<int> foo acts mostly like int *foo, but the former is certainly not named
@@ -42,7 +42,8 @@ The variable is named foo. It is of type int*. Anything else is hiding informati
 
 I believe the C language is like this for historical reasons; when C was invented, every byte was
 expensive, and int foo,*bar,**baz; was a significant saving over int foo; int* bar; int** baz;.
-These days, that justification no longer exists.
+Optimizations were expensive too, and compilers didn't do them; manual optimization with pointer
+math yielded better results than array indexing. These days, those justifications no longer apply.
 
 
 If you believe I'm missing some important detail, corrections and harassment welcome at GitHub
