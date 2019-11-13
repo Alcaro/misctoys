@@ -2,15 +2,17 @@
 # SPDX-License-Identifier: Unlicense
 
 # This is a script I made to replace certbot, since my domain registrar isn't supported by Certbot DNS-01.
+# I tried using Certbot's acme.client, but I just kept getting errors about ToS agreement and missing kid and had to reinvent it.
 # I'm sharing it so others can use it as example/template, nothing else.
 # It intentionally lacks configurability, error handling, coding style, etc.
-# Keyword spam: Python ACME client wildcard DNS-01 Let's Encrypt example
+# Keyword spam: Python ACME client wildcard certificate DNS-01 Let's Encrypt example
 
-import base64, json, hashlib, os
+import base64, json, hashlib, os, subprocess, time, datetime
 from OpenSSL import crypto, SSL
+from urllib.request import urlopen, Request
 import xmlrpc.client
 try:
-	from mycert_conf import *  # This is separate because it contains passwords/etc, nothing else.
+	from mycert_conf import *  # This is separate because it contains passwords/etc, not for code quality purposes.
 except ImportError:
 	conf_domains = [ "muncher.se", "*.muncher.se" ]
 	conf_account_location = "https://acme-v02.api.letsencrypt.org/acme/acct/12345678" 
@@ -60,7 +62,6 @@ def b64int(i):
 # returns ( code, headers, body )
 def http_raw(url, body):
 	print("Requesting", url)
-	from urllib.request import urlopen, Request
 	try:
 		rsp = urlopen(Request(url, data=body, headers={"Content-Type": "application/jose+json",
 		                           "User-Agent": "mycert.py +https://github.com/Alcaro/misctoys/blob/master/mycert.py"}))
@@ -102,6 +103,20 @@ def http(url, body=None):
 	
 	return ( code, headers, ret )
 
+while True:
+	try:
+		oldcert = crypto.load_certificate(crypto.FILETYPE_PEM, open("/home/alcaro/mount/server/etc/ssl/live/fullchain.pem", "rb").read())
+	except FileNotFoundError:
+		print("sshfs not mounted yet, retrying later")
+		time.sleep(5)
+		continue
+	oldexpiry = datetime.datetime.strptime(oldcert.get_notAfter().decode("utf-8"), "%Y%m%d%H%M%SZ")
+	if oldexpiry - datetime.timedelta(30) > datetime.datetime.now():
+		print("Cert expiry", oldexpiry, "is distant enough - not renewing")
+		exit()
+	else:
+		break
+
 key = crypto.load_privatekey(crypto.FILETYPE_PEM, conf_account_key)
 
 keynum = key.to_cryptography_key().public_key().public_numbers()
@@ -128,7 +143,7 @@ for auth in order["authorizations"]:
 	token = chosen["token"] + "." + thumbprint
 	
 	if chosen["type"] == "http-01":
-		path = "/home/alcaro/mount/muncher.se/etc/ssl/acme-challenge/"+chosen["token"]
+		path = "/home/alcaro/mount/server/etc/ssl/acme-challenge/"+chosen["token"]
 		with open(path, "wt") as f:
 			f.write(token)
 		to_delete.append(path)
@@ -143,7 +158,6 @@ for auth in order["authorizations"]:
 	validate_reqs.append(chosen["url"])
 
 for n in range(60):
-	import time
 	print("Waiting", 60-n, "seconds for DNS propagation")
 	time.sleep(1)
 
@@ -152,14 +166,22 @@ for url in validate_reqs:
 	print(status)
 
 for n in range(60):
-	import time
 	print("Waiting", 60-n, "seconds for validation")
 	time.sleep(1)
 
+print("Cleaning up")
+
+xmlrpc.client.ServerProxy(uri="https://api.loopia.se/RPCSERV", encoding="utf-8").\
+       updateZoneRecord("floatingmunchers@loopiaapi", conf_loopia_password, "muncher.se", "_acme-challenge",
+                        { "type":"TXT", "ttl":300, "priority":0, "rdata":"[object Object]", "record_id":conf_loopia_id })
+
+for fn in to_delete:
+	os.remove(fn)
+
+print("Finalizing cert")
+
 out_key = crypto.PKey()
 out_key.generate_key(crypto.TYPE_RSA, 2048)
-with open("/home/alcaro/mount/server/etc/ssl/live/privkey.pem", "wb") as f:
-	f.write(crypto.dump_privatekey(crypto.FILETYPE_PEM, out_key))
 
 csr = crypto.X509Req()
 csr.get_subject().CN = conf_domains[0]
@@ -177,18 +199,14 @@ print(result)
 _,_,cert = http(result["certificate"], None)
 print(cert)
 
+if not cert.startswith("-----BEGIN CERTIFICATE-----"):
+	1/0
+
+# keep it as "wb" even though it's text, openssl hates string and loves bytes
+with open("/home/alcaro/mount/server/etc/ssl/live/privkey.pem", "wb") as f:
+	f.write(crypto.dump_privatekey(crypto.FILETYPE_PEM, out_key))
 with open("/home/alcaro/mount/server/etc/ssl/live/fullchain.pem", "wt") as f:
 	f.write(cert)
 
-print("Cleaning up")
-
-xmlrpc.client.ServerProxy(uri="https://api.loopia.se/RPCSERV", encoding="utf-8").\
-       updateZoneRecord("floatingmunchers@loopiaapi", conf_loopia_password, "muncher.se", "_acme-challenge",
-                        { "type":"TXT", "ttl":300, "priority":0, "rdata":"123", "record_id":conf_loopia_id })
-
-for fn in to_delete:
-	os.remove(fn)
-
-
-
-
+print(subprocess.run(["ssh", "floating.muncher.se", "sudo /etc/ssl/live/deploy.sh"]))
+1/0
