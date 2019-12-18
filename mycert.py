@@ -106,7 +106,7 @@ def http(url, body=None):
 while True:
 	try:
 		oldcert = crypto.load_certificate(crypto.FILETYPE_PEM, open("/home/alcaro/mount/server/etc/ssl/live/fullchain.pem", "rb").read())
-	except FileNotFoundError:
+	except OSError:
 		print("sshfs not mounted yet, retrying later")
 		time.sleep(5)
 		continue

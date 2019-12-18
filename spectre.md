@@ -34,6 +34,7 @@ Depending on how you count, some of them may be trivial variants of each other w
 | Microarchitectural Data Sampling<br>RIDL (MFBDS, MLPDS)<br>Fallout (MSBDS)<br>ZombieLoad (MFBDS) | 2019-05-14<br>CVE-2018-12130<br>CVE-2018-12126<br>CVE-2018-12127<br>CVE-2019-11091 | No-longer-valid entries in various memory access buffers may be speculatively available, including across hyperthreads; no secret-dependent or mispredicted branches needed, EVERYTHING is vulnerable (except non-Intel) | https://www.redhat.com/en/blog/understanding-mds-vulnerability-what-it-why-it-works-and-how-mitigate-it<br>https://mdsattacks.com/ | Yes, microcode and kernel patch |
 | RAMBleed | 2019-06-12<br>CVE-2019-0174 | Rowhammer seemingly-randomly corrupts memory; apparently the corruption isn't random after all, but depends on nearby bits, allowing information leaks | https://rambleed.com/ | Same as Rowhammer |
 | TSX Asynchronous Abort (RIDL-TAA) | 2019-11-12<br>??? | MDS/RIDL mitigation microcode was incomplete, and left some TSX-related hole open | https://mdsattacks.com/ | Not yet |
+| Plundervolt | 2019-12-16<br>CVE-2019-11157 | Much to nobody's surprise, undervolting the CPU makes it misbehave. Less unsurprisingly, software can do this. Root-only, of course, but still effective against SGX enclaves. | https://www.plundervolt.com/ | Yes, microcode update to disable undervolting (or, if you're not using SGX, ignore it) |
 
 Other named relevant vulnerabilities, not listed above due to being older than Spectre: Rowhammer (2014-06-24), CacheBleed (2016-08-04), MemJam (2017-03-07)
 
