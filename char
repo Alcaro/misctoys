@@ -1,0 +1,14 @@
+#!/usr/bin/env python3
+
+# usage: char aø֐☃䑄💩񠀀
+# result:
+# U+0061 a LATIN SMALL LETTER A
+# U+00F8 ø LATIN SMALL LETTER O WITH STROKE
+# U+0590 ֐ Unassigned
+# U+2603 ☃ SNOWMAN
+# U+4444 䑄 CJK UNIFIED IDEOGRAPH-4444
+# U+1F4A9 💩 PILE OF POO
+# U+60000 񠀀 Unassigned
+
+import sys, unicodedata
+for char in " ".join(sys.argv[1:]): print("U+%04X %s %s" % ( ord(char), char, unicodedata.name(char, "Unassigned") ))
