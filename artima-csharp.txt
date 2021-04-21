@@ -1,0 +1,23 @@
+It's nontrivial to find these links (each episode links to all previous but not to the next), and they've moved around a few times (as of writing, 2021-04-21, the aforementioned previous links are broken).
+
+A Conversation with Anders Hejlsberg
+The Artima C# interview
+
+https://www.artima.com/articles/the-c-design-process
+https://www.artima.com/articles/the-trouble-with-checked-exceptions
+https://www.artima.com/articles/delegates-components-and-simplexity
+https://www.artima.com/articles/versioning-virtual-and-override
+https://www.artima.com/articles/contracts-and-interoperability
+https://www.artima.com/articles/inappropriate-abstractions
+https://www.artima.com/articles/generics-in-c-java-and-c
+https://www.artima.com/articles/clr-design-choices
+
+Old links:
+https://www.artima.com/intv/csdes.html
+https://www.artima.com/intv/handcuffs.html
+https://www.artima.com/intv/simplexity.html
+https://www.artima.com/intv/nonvirtual.html
+https://www.artima.com/intv/interop.html
+https://www.artima.com/intv/abstract.html
+https://www.artima.com/intv/generics.html
+(I was unable to find the old link to chapter 8)

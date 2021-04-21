@@ -10,6 +10,8 @@ Most of those issues affect only Intel processors, some are cross-vendor. Rosenb
 
 Depending on how you count, some of them may be trivial variants of each other with identical mitigations, not worth considering separate. I've split everything with a marketing name, but noted (my understanding of) how they relate to each other.
 
+https://transient.fail/ contains a similar list of vulnerabilities.
+
 | Marketing name | Public disclosure | Description | Links | Mitigated on Linux? |
 | ---------- | ---------- | ---------- | ---------- | ---------- |
 | Spectre 1 - Bounds Check Bypass | 2018-01-03<br>CVE-2017-5753 | Constructions like `if (idx < limit) return foo[bar[idx]]` can, if the branch is mispredicted, leak the address of `foo[bar[too_big_index]]`, i.e. the value of `bar[too_big_index]` | https://meltdownattack.com/ | Partial mitigations exist, but work is still ongoing |
@@ -33,11 +35,14 @@ Depending on how you count, some of them may be trivial variants of each other w
 | SPOILER | 2019-03-01<br>no CVE assigned | Cache miss timing can leak pages' physical addresses, or at least virt2phys(ptr1) xor virt2phys(ptr2) | https://arxiv.org/pdf/1903.00446.pdf | The leak - no. But physical addresses are rarely used; they're useful for some other attacks (most notably Rowhammer), but most of them are mitigated by now. |
 | Microarchitectural Data Sampling<br>RIDL (MFBDS, MLPDS)<br>Fallout (MSBDS)<br>ZombieLoad (MFBDS) | 2019-05-14<br>CVE-2018-12130<br>CVE-2018-12126<br>CVE-2018-12127<br>CVE-2019-11091 | No-longer-valid entries in various memory access buffers may be speculatively available, including across hyperthreads; no secret-dependent or mispredicted branches needed, EVERYTHING is vulnerable (except non-Intel) | https://www.redhat.com/en/blog/understanding-mds-vulnerability-what-it-why-it-works-and-how-mitigate-it<br>https://mdsattacks.com/ | Yes, microcode and kernel patch |
 | RAMBleed | 2019-06-12<br>CVE-2019-0174 | Rowhammer seemingly-randomly corrupts memory; apparently the corruption isn't random after all, but depends on nearby bits, allowing information leaks and worse | https://rambleed.com/ | Same as Rowhammer |
-| TSX Asynchronous Abort (RIDL-TAA) | 2019-11-12<br>??? | MDS/RIDL mitigation microcode was incomplete, and left some TSX-related hole open | https://mdsattacks.com/ | Not yet |
+| TSX Asynchronous Abort (RIDL-TAA) | 2019-11-12<br>??? | MDS/RIDL mitigation microcode was incomplete, and left a TSX-related hole open | https://mdsattacks.com/ | Not yet |
 | Plundervolt | 2019-12-16<br>CVE-2019-11157 | Much to nobody's surprise, undervolting the CPU makes it misbehave. Less unsurprisingly, software can do this. Root-only, of course, but still effective against SGX enclaves. | https://www.plundervolt.com/ | Yes, microcode update to disable undervolting (or, if you're not using SGX, you're not vulnerable) |
 | Vector Register Sampling<br>L1D Eviction Sampling<br>CacheOut | 2020-01-27<br>CVE-2020-0548<br>CVE-2020-0549 | Looks like simple variants of Microarchitectural Data Sampling, targetting slightly different data | https://cacheoutattack.com/<br>https://blogs.intel.com/technology/2020/01/ipas-intel-sa-00329/ | No, a microcode update is announced but not released yet |
 | Take A Way | 2020-03-08?<br>can't find a CVE | AMD L1d cache timing can be abused to determine whether another process has used a particular virtual address, allowing, for example, ASLR breaks | https://mlq.me/download/takeaway.pdf | Other than the ASLR breaks, yes (even prior to disclosure), secret-dependent branches and addresses have always been a timing leak |
+| Load Value Injection | <br>CVE-2020-0551 | It's Spectre backwards, to inject bogus data into speculative execution, to trick ordinary code into becoming Spectre gadgets | https://lviattack.eu/ | No, but the vulnerability is only applicable to SGX in practice |
+| TRRespass | 2020-03-10<br>No CVE found | Rowhammer but better; a more complicated form of Rowhammer can overwhelm the mitigations | https://www.vusec.net/projects/trrespass/ | No, and it's unclear whether it's possible to mitigate in either software or microcode |
+| Snoop-assisted L1 Data Sampling | 2020-03-10<br>CVE-2020-0550 | Like Load Value Injection, bogus data is injected into speculation; can't find any real difference | https://software.intel.com/security-software-guidance/insights/deep-dive-snoop-assisted-l1-data-sampling | Same as L1 Terminal Fault |
 
 Other named relevant vulnerabilities, not listed above due to being older than Spectre: Rowhammer (2014-06-24), CacheBleed (2016-08-04), MemJam (2017-03-07)
 
-Other named somewhat-relevant vulnerabilities, but which are instead oversights in mitigations for already-known hardware issues: Grand Schemozzle (2019-08-06)
+Other named somewhat-relevant vulnerabilities, but which are instead software bugs in mitigations for already-known hardware issues: Grand Schemozzle (2019-08-06)

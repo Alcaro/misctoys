@@ -208,5 +208,5 @@ with open("/home/alcaro/mount/server/etc/ssl/live/privkey.pem", "wb") as f:
 with open("/home/alcaro/mount/server/etc/ssl/live/fullchain.pem", "wt") as f:
 	f.write(cert)
 
-print(subprocess.run(["ssh", "floating.muncher.se", "sudo /etc/ssl/live/deploy.sh"]))
-1/0
+proc = subprocess.run(["ssh", "floating.muncher.se", "sudo /etc/ssl/live/deploy.sh"])
+if proc.returncode != 0: 1/0
