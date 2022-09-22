@@ -6,7 +6,7 @@ really care (tab vs space, space after if, etc; I have my preferences, of course
 whatever the project does). It's somewhat silly that there's no universally agreed-upon standard,
 but that's what happens when opinions come into the game.
 
-But there is one I care more about; not enough to whine about, but I have to consciously think of
+But there is one I care more about; not enough to complain about, but I have to consciously think of
 it, rather than instantly inferring it from the surrounding code.
 
 Where the asterisk goes on pointer variable declarations.
@@ -32,7 +32,8 @@ Why? Because most of the time, you don't want the asterisk. Array? You probably 
 instead. strlen? Passing variables takes no asterisk. Pointer to a struct? That's usually
 operator->. void pointer? Needs a cast; either inline (the variable certainly isn't named
 *(int *)foo), or as another variable (which doesn't necessarily want unary operator* either). Unary
-operator* does appear sometimes, but it's too rare to dictate the coding style elsewhere.
+operator* does appear sometimes (mostly in iterators and out parameters), but it's too rare to
+dictate the coding style elsewhere.
 
 And then there's a whole other can of worms in C++, where templates force you to put everything on
 the left side (unique_ptr<int> foo acts mostly like int *foo, but the former is certainly not named

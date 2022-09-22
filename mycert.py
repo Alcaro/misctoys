@@ -2,8 +2,8 @@
 # SPDX-License-Identifier: Unlicense
 
 # This is a script I made to replace certbot, since my domain registrar isn't supported by Certbot DNS-01.
-# I tried using Certbot's acme.client, but I just kept getting errors about ToS agreement and missing kid and had to reinvent it.
-# I'm sharing it so others can use it as example/template, nothing else.
+# I tried importing Certbot's acme.client, but I just kept getting errors about ToS agreement and missing kid and had to reinvent it.
+# I'm sharing as an example/template, nothing else; I do not recommend anyone else deploy it to production in its current state.
 # It intentionally lacks configurability, error handling, coding style, etc.
 # Keyword spam: Python ACME client wildcard certificate DNS-01 Let's Encrypt example
 
@@ -12,7 +12,9 @@ from OpenSSL import crypto, SSL
 from urllib.request import urlopen, Request
 import xmlrpc.client
 try:
-	from mycert_conf import *  # This is separate because it contains passwords/etc, not for code quality purposes.
+	# This is separate because it contains passwords/etc, not for code quality purposes.
+	# There are a few hardcoded usernames/etc further down, mostly in filenames and DNS-01 handling.
+	from mycert_conf import *
 except ImportError:
 	conf_domains = [ "muncher.se", "*.muncher.se" ]
 	conf_account_location = "https://acme-v02.api.letsencrypt.org/acme/acct/12345678" 
@@ -105,7 +107,7 @@ def http(url, body=None):
 
 while True:
 	try:
-		oldcert = crypto.load_certificate(crypto.FILETYPE_PEM, open("/home/alcaro/mount/server/etc/ssl/live/fullchain.pem", "rb").read())
+		oldcert = crypto.load_certificate(crypto.FILETYPE_PEM, open("/home/walrus/mount/server/etc/ssl/live/fullchain.pem", "rb").read())
 	except OSError:
 		print("sshfs not mounted yet, retrying later")
 		time.sleep(5)
@@ -143,7 +145,7 @@ for auth in order["authorizations"]:
 	token = chosen["token"] + "." + thumbprint
 	
 	if chosen["type"] == "http-01":
-		path = "/home/alcaro/mount/server/etc/ssl/acme-challenge/"+chosen["token"]
+		path = "/home/walrus/mount/server/etc/ssl/acme-challenge/"+chosen["token"]
 		with open(path, "wt") as f:
 			f.write(token)
 		to_delete.append(path)
@@ -203,9 +205,9 @@ if not cert.startswith("-----BEGIN CERTIFICATE-----"):
 	1/0
 
 # keep it as "wb" even though it's text, openssl hates string and loves bytes
-with open("/home/alcaro/mount/server/etc/ssl/live/privkey.pem", "wb") as f:
+with open("/home/walrus/mount/server/etc/ssl/live/privkey.pem", "wb") as f:
 	f.write(crypto.dump_privatekey(crypto.FILETYPE_PEM, out_key))
-with open("/home/alcaro/mount/server/etc/ssl/live/fullchain.pem", "wt") as f:
+with open("/home/walrus/mount/server/etc/ssl/live/fullchain.pem", "wt") as f:
 	f.write(cert)
 
 proc = subprocess.run(["ssh", "floating.muncher.se", "sudo /etc/ssl/live/deploy.sh"])
