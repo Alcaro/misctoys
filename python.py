@@ -3,7 +3,7 @@
 
 # catching SIGINT by default; ^C should always terminate the process, even if it's currently
 #  awaiting GUI events or otherwise not executing python code
-# (and even when the KeyboardInterrupt is raised, many GUI tools just print the exception and discard it without terminatíng)
+# (and even when the KeyboardInterrupt is raised, many GUI frameworks and tools just print the exception and discard it without terminatíng)
 
 # python ternary is middle endian, and inconsistent with most other programming languages
 # being written in english pronunciation order is a valid argument, but it's weak
@@ -24,6 +24,7 @@ f("abc","def")
 # flattening nested lists, again, has endian issues
 xss = [[1,2],[3],[],[4]]
 print([x for xs in xss for x in xs])
+# print([x for x in xs for xs in xss]) would be a lot less ugly, or print([for xs in xss for x in xs select x])
 
 # dir() and id() are too rare, and too valuable as variable names, to be builtin auto-imported functions
 print(dir(5))
@@ -36,6 +37,7 @@ print(id(5)))
 "abcde"[:-1]  # "abcd"
 "abcde"[:-0]  # ""
 # should've been [:~3], [:~2], [:~1], [:~0]
+# "abcde"[:None] is "abcde", and you can use "abcde"[:len(abcde)-0], but ~ would've been smoother
 
 # functions' default arguments are only evaluated once, not on every call
 def g(l=[]):
@@ -60,6 +62,11 @@ def fn():
 	if False:
 		yield 0
 
+# the XML parsers enable several dangerous features by default https://docs.python.org/3/library/xml.html#xml-vulnerabilities
+
+# the hashmap iteration fiasco - made it impossible to compare dicts between runs, and was backported all over
+# and then they chose to repeat that fiasco with int("1"*5000)
+
 # indentation based syntax - easy to get mixed tabs and spaces and all kinds of fun errors, doesn't
 # allow making debug code more prominent by removing indentation, and doesn't allow removing the
 # indent if 95% of the file is in the same class
@@ -75,4 +82,5 @@ def fn():
 # negative. To me, the above look like implementation constraints (for example, Iterable is a pure
 # virtual interface, there's no base class in which to implement .all()), artifacts of early Python
 # development (GIL), and/or backwards compatibility with decisions that were wrong even when they
-# were made (but perhaps nobody knew how wrong they are).
+# were made (but perhaps Python was the first language to make that choice, so nobody knew how wrong
+# they are).
