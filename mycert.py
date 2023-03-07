@@ -151,9 +151,9 @@ for auth in order["authorizations"]:
 		to_delete.append(path)
 	elif chosen["type"] == "dns-01":
 		enctoken = b64(hashlib.sha256(token.encode('utf8')).digest())
-		xmlrpc.client.ServerProxy(uri="https://api.loopia.se/RPCSERV", encoding="utf-8").\
-		       updateZoneRecord("floatingmunchers@loopiaapi", conf_loopia_password, "muncher.se", "_acme-challenge",
-		                        { "type":"TXT", "ttl":300, "priority":0, "rdata":enctoken, "record_id":conf_loopia_id })
+		print(xmlrpc.client.ServerProxy(uri="https://api.loopia.se/RPCSERV", encoding="utf-8").\
+		             updateZoneRecord("floatingmunchers@loopiaapi", conf_loopia_password, "muncher.se", "_acme-challenge",
+		                              { "type":"TXT", "ttl":300, "priority":0, "rdata":enctoken, "record_id":conf_loopia_id }))
 	else:
 		1/0
 	
@@ -173,9 +173,9 @@ for n in range(60):
 
 print("Cleaning up")
 
-xmlrpc.client.ServerProxy(uri="https://api.loopia.se/RPCSERV", encoding="utf-8").\
-       updateZoneRecord("floatingmunchers@loopiaapi", conf_loopia_password, "muncher.se", "_acme-challenge",
-                        { "type":"TXT", "ttl":300, "priority":0, "rdata":"[object Object]", "record_id":conf_loopia_id })
+print(xmlrpc.client.ServerProxy(uri="https://api.loopia.se/RPCSERV", encoding="utf-8").\
+             updateZoneRecord("floatingmunchers@loopiaapi", conf_loopia_password, "muncher.se", "_acme-challenge",
+                              { "type":"TXT", "ttl":300, "priority":0, "rdata":"[object Object]", "record_id":conf_loopia_id }))
 
 for fn in to_delete:
 	os.remove(fn)
