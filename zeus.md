@@ -1,5 +1,6 @@
 Sir Walrus' Occasionally Unethical Advice  
 Master of Olympus - Zeus and Master of Atlantis - Poseidon
+https://www.gog.com/en/game/zeus_poseidon
 
 General
 =======
@@ -36,9 +37,9 @@ For common housing, I usually build nine or ten Fish Ponds in a row, surround th
 
 For elite housing, I start with a 89 tiles long straight road (178 drachma). The outer 40 tiles on each end are Boulevard; the middle contains roads to both sides (sometimes one road is omitted, for space reasons), a Grand Agora, and Tax Office and Maintenance Office. Beyond the end of the road, I place Gymnasium, and additional Tax Office and Maintenance Office (usually on a road to the side, for space reasons). The Gymnasium can't reach the innermost four houses; this is solved by placing more Gymnasiums on the side roads by the Agora (sometimes without a Maintenance Office - on Beginner difficulty, Gymnasium is one of few buildings that can neither collapse nor catch fire). I omit the Infirmary - it'll make the game say hygiene isn't perfect, but it has no real consequences. Like common housing, I put Fish Ponds behind the houses, culture behind the road end roadblocks, and I ignore the roaming culture walkers. This allows one Agora to cover 40 elite houses, neatly filling the palace.
 
-The above can, of course, be reduced, in case of space constraints; most cities can't fit the elite housing's 89x19 rectangle (plus the culture at the end), and even the common district's 41x22 won't always fit, especially in colonies. I often remove a few appeal buildings, and sometimes shorten the districts.
+The above can, of course, be reduced, in case of space constraints; most cities can't fit the elite housing's 89x19 rectangle (plus the culture at the end), and even the common district's 41x22 won't always fit, especially in colonies. I often remove a few appeal buildings, and sometimes shorten the districts. (In rare cases, I try another shape.)
 
-In Atlantis, I replace the elite district's middle Maintenance Office with Bibliotheke (or, on the easiest difficulty, I simply omit the Bibliotheke - as long as the Museum is functional, they'll reach Estate even without scholar access). I also replace every Fish Pond with Stone Circle; they are, by far, the most powerful, though their range is shorter than Fish Pond and Baths.
+In Atlantis, I replace the elite district's middle Maintenance Office with Bibliotheke (or, on Beginner difficulty, I simply omit the Bibliotheke - as long as the Museum is functional, they'll reach Estate even without scholar access). I also replace every Fish Pond with Stone Circle; they are, by far, the most powerful, though their range is shorter than Fish Pond and Baths.
 
 Invading gods
 -------------
@@ -65,7 +66,7 @@ Elite housing pays a lot more taxes than common, but that's ethical and unintere
 
 You can also leave a significant fraction of your population unemployed, adjust wages or taxes, or hire them as rabble/archers, but this affects popularity if done for too long.
 
-A few things that don't affect popularity are building more Fish Ponds and Monuments (housing in high-appeal areas pay more taxes), upgrading them (Homestead pays twice as much taxes per citizen as Hovel - if you get too many employees, just remove some houses), and building and manning more Trireme Wharfs and Towers (they don't count as employees - they don't claim wages).
+A few things that don't affect popularity are building more Fish Ponds and Monuments (housing in high-appeal areas pay more taxes), building and manning more Trireme Wharfs and Towers (they don't count as employees - they don't claim wages), and upgrading your houses (Homestead pays twice as much taxes per citizen as Hovel).
 
 Of course, the most ethical unethically sourced money is to raid an ally (Greece only), but if you have a military, you have the elite houses' tax money already.
 
@@ -113,14 +114,15 @@ Difficulty
 ----------
 
 I have discovered these changes between Beginner and Mortal:
-- Construction cost
-- Rivals' tribute demands (but not incoming tribute)
+- Construction costs
+- Rivals' tribute demands (but not tribute paid by vassals)
 - Cost to bribe invaders (I didn't check if army size changes, or only cost per enemy invader)
 - Tax income (but not wage costs)
-- How much a successful request grants (and everything keyed on that, like philantropy and raids)
+- How much a successful request grants (and everything based on that, like raids and spontaneous gifts)
 - Fraction of common housing that's employed (on Beginner with Normal wages, 51% of common housing are willing to work; increasing difficulty will remove 5%, 5%, 3% and 2% of population, respectively; adjusting wages will add or remove 4%, 3%, 3%, 3% and 2% of population, respectively)
 - How low favor will go before a rival invades you (probably similar for allies and vassals, and before they grant you a gift; those numbers are hard to measure)
-- (The only change that isn't just numbers) On difficulty Beginner and higher, Gymnasium, Stadium and Palace can't collapse, even if you omit the Maintenance Office
+- How much culture is needed for houses to evolve (appeal too, I think)
+- On Beginner difficulty, Gymnasium, Stadium and Palace can't collapse, even if you omit the Maintenance Office
 In short, difficulty affects mostly finances, and nothing interesting.
 
 I haven't played Hero, Titan or Olympian. Judging by rivals' tribute claims, the game's natural state is Beginner.
@@ -350,7 +352,7 @@ Advice:
 Colony: Ithaca  
 Disasters:  
 &nbsp; Scylla - near the middle of the map. She's pretty relaxed for a monster; keep your Piers far away, and she'll leave them alone.  
-&nbsp; Cyclops - on the heavily forested island to the west. No point trapping him, he's already harmless.  
+&nbsp; Cyclops - on the heavily forested island to the west. Just ignore him, that island is useless anyways.  
 &nbsp; Tidal wave - at the northwestmost island. Covers almost the entire thing.  
 &nbsp; Tidal wave - at the southeastmost island. Covers almost the entire thing.  
 &nbsp; Earthquake - by the marble. Blocks it off, but you can build bridges across the cracks.  
@@ -367,12 +369,12 @@ Quests: Poseidon (Odysseus)
 Notably absent buildings: Timber Mill, Horse Ranch  
 Advice:  
 &nbsp; The easiest way to acquire more armor in the second episode is plundering Cyme. Just send a single Trireme; it'll succeed, you'll lose nothing. Or send six parties of one Trireme each. Then set them to Attack All Enemies mode if you don't want to bribe the resulting invasion force.  
-&nbsp; Build six Trireme Wharfs before founding your first colony. The colony will be attacked by Troy and their allies shortly after you return, and will be conquered if you fail to defend it; it may be difficult to build sufficient Hoplites that quickly, but the warships are enough. Do not join your allies' attacks on Troy, unless you want to lose your boats.  
+&nbsp; Build six Trireme Wharfs, or build an elite district and stockpile some armor, before founding your first colony. The colony will be attacked by Troy and their allies shortly after you return, and will be conquered if you fail to defend it. Do not join your allies' attacks on Troy, unless you want to lose your boats.  
 &nbsp; Conquer Sparta. Their tribute is 12 armor; you can import bronze, but free is cheaper, and tribute plus trade is faster than trade alone.
 
 Colony: Tenedos  
 Heroes: Achilles  
-Quests: Hephaestus? (Achilles)  
+Quests: Hephaestus (Achilles)  
 Disasters:  
 &nbsp; Hector - at the right end of the town, near the middle. Not trappable, no islands. Summon Achilles immediately, you have enough time to build a worthy city.  
 Advice:  
@@ -423,7 +425,7 @@ Disasters:
 Notably absent buildings: None. You have everything you need, including every natural resource except silver. Oddly enough, the story acts as if you don't have bronze or orichalc.  
 Advice:  
 &nbsp; You have plenty of space, but in inconvenient shapes, and you also have a lot of goals that require a lot of space: population 5000, elite housing, Hippodrome, and several Sanctuaries and Pyramids. Luckily, many are unnecessary after their respective episodes; the Forge of Hephaestus, the elite housing, and the Citadel of Poseidon can be removed after their respective episodes (though you'll need Atalanta several times, so keep Artemis' Menagerie).  
-&nbsp; The Hippodrome fits best on the circle landmass around the central mountain. Note that only 44% of possible starting locations for the Hippodrome will work; the other 56% will get stuck around the southwest corner, and you'll have to try another location. Other than that, it doesn't matter which of the start locations you choose; while the maximum Hippodrome length is different, there's no difference between a 70 or 80 stades Hippodrome.
+&nbsp; The Hippodrome fits best on the circle landmass around the central mountain. Note that only 44% of possible starting locations for the Hippodrome will work; the other 56% will get stuck around the southwest corner, and you'll have to shift everything one tile and try again. Other than that, it doesn't matter which of the start locations you choose; while the maximum Hippodrome length is different, there's no difference between a 70 or 80 stades Hippodrome.
 
 Colony: Evenesteus  
 Advice:  
@@ -443,6 +445,7 @@ Quests: Demeter (Jason)
 Disasters:  
 Notably absent buildings: Timber Mill  
 Advice:  
+&nbsp; This city is huge. You can easily fit every residental district shape you want.  
 &nbsp; You'll have an episode goal to build the Garden of Demeter, and some other sanctuaries. To take full advantage of their resources, keep some empty space near the meadows.
 
 Colony: Ianira  
@@ -507,10 +510,10 @@ Quests: Atlas (Hercules), Ares (Atalanta), Hera (Jason)
 Disasters:  
 &nbsp; Flood - the northeast island. The entire island.  
 &nbsp; Flood - the northeastern shore, north of the river delta. The entire shore. Most buildable places will be lost.  
-&nbsp; Flood - The river delta, plus the river's northern shore, up to and including the nearby meadow.  
+&nbsp; Flood - The river delta, plus the river's northern shore, up to and including the nearby meadow. Will open a lot of buildable water by the river.  
 Notably absent buildings: None  
 Advice:  
-&nbsp; This adventure starts out financially tight. There are three income sources available early - buy grapes and sell wine, sell black marble, and tax the commoners. Homestead and higher pay twice as much taxes per citizen as Hovel and lower, so importing fleece will give you your money back. (Olive oil is less profitable.)
+&nbsp; This adventure starts out financially tight. There are three income sources available early - buy grapes and sell wine, sell black marble, and tax the commoners. Homestead and higher pay twice as much taxes per citizen as Hovel and lower, so importing fleece will give you your money back. (Olive oil is less profitable.) (TODO: check if frigate wharf and tower can allow turning an income even without fleece)
 
 Colony: Thera  
 Disasters:  
@@ -536,6 +539,7 @@ Disasters:
 &nbsp; Echidna - at the second southern peninsula from the west, near the deer breeding grounds  
 Notably absent buildings: None  
 Advice:  
+&nbsp; This city is as big as Enlightenment in the West. Go wild with whatever buildings you want.  
 &nbsp; The three allies to the southwest yield a tribute of 1 drachma if conquered. Don't bother, unless you want the conquest monuments. (Raid them instead.)  
 &nbsp; You'll need to summon Bellerophon four times, each one taking 24 bronze, plus you need some Hoplites and sanctuaries that also need bronze. If you don't want to import it, raid Antissa; trade suspensions are temporary, bronze is eternal. Alternatively (or afterwards), you can conquer Antissa and Solymi; their tributes are 6 and 8 bronze, respectively.  
 &nbsp; If a quest is the last (or only) goal in this episode, the episode end screen will override the quest completion message. However, if you dispatched the hero in October or April, then load Autosave History once the episode completes, it will be January or July in the previous episode, and you can read the message log. This glitch is temporary, the next episode will start in February or August.
@@ -543,7 +547,7 @@ Advice:
 Colony: Heraeum  
 Heroes: Bellerophon (unavailable), Perseus  
 Disasters:  
-&nbsp; Medusa - on the hills near the middle of the map. You can easily trap her on the northern landmass, or if you want that copper ore, you can give her a smaller home - once a monster runs out of walls to destroy, she will walk back to her origin if possible, even if that requires a detour via two water crossings at the east edge of the map.  
+&nbsp; Medusa - on the hills near the middle of the map. You can easily trap her on the northern landmass, or if you want that copper ore, you can give her a smaller home - once a monster runs out of walls to destroy, she will walk back to her origin if possible, even if that requires a detour via two water crossings at the east edge of the map. (Wall off the nearby boars, or she may get distracted.)  
 Notably absent buildings: Horse Ranch. You can build Bellerophon's Hall, but you can't summon him.
 
 Two Worlds Collide
@@ -564,13 +568,13 @@ Disasters:
 Notably absent buildings: Lumber Mill  
 Advice:  
 &nbsp; Other than Proteus and Bellerophon, the Master of Atlantis adventures form a single story.  
-&nbsp; Like Atlantis Reborn, this adventure starts out financially tight. The obvious solution would be selling armor to Athens, but they will soon be conquered by Knossos. Instead, quickly request some drachmas from Athens and Sparta while they're still allies, then build quickly, so your silver mining plus tax income exceeds bribing the Atlanteans. If you need more money, feel free to build a row of Artisans' Guilds, just to waste some tax-paying workers.  
+&nbsp; Like Atlantis Reborn, this adventure starts out financially tight. The obvious solution would be selling armor to Athens, but they will soon be conquered by Knossos. Instead, quickly request some drachmas from Athens and Sparta while they're still allies, then build quickly, so your silver mining plus tax income exceeds bribing the Atlanteans. If you need more money, feel free to build a row of Artisans' Guilds, just to waste some tax-paying workers. (TODO: check if Tower is even more effective)  
 &nbsp; This city is rocky, with most usable space being in inconvenient shapes, and much of what is usable is future disaster areas. You may need to get creative with the residental districts' shape and size. You need a minimum of 16 elite houses, though more is, of course, helpful to conquer other cities.  
 &nbsp; You will get 60 slabs of marble and 12 planks of wood as gifts. The Forge of Hephaestus costs 13+44 marble, 12 wood, and 6 sculptures.  
 &nbsp; If you need wheat, you can raid Sidon or Thebes (latter gives 3x more), conquer them and import, or conquer them and collect their tribute (12 wheat each).  
 &nbsp; Zeus' Stronghold is useful to hold off Atlas and Poseidon, but is not needed for any episode goals. If you'd rather not build something that big, you don't need to.  
 &nbsp; If you're lucky, you can summon Odysseus fast enough to rescue Salamis from Cyclops - but the city (if rescued) will disappear at the end of the episode, so there isn't much point. Zeus' Stronghold can't predict the attack either - it'll predict a request instead.  
-&nbsp; Sometimes, heroes fighting Atlas will lose and be turned to stone. If so, they will never return to your city, even if you remove and rebuild the Hall. You may want to keep them far from him.
+&nbsp; Sometimes, heroes fighting Atlas will lose and be turned to stone. If so, they will never return to your city, even if you remove and rebuild the Hall. You may want to keep them far from him, or load a save.
 
 Colony: Knossos  
 Advice:  
@@ -580,4 +584,4 @@ Advice:
 Colony: Salamis  
 Advice:  
 &nbsp; You'll need to conquer Carthage, Tyre and Sidon, and build one Sanctuary. Three of those goals are easiest done in your parent city - or would be, but Carthage, Sidon, Memphis and Saqqara will become rivals just before your first colony, and Carthage and Saqqara will become rivals before your second.  
-&nbsp; This location is difficult - there's no food, other than imports, and only two possible trireme locations. You'll need to rely on Hoplites and a lot of imports, or if you treated your allies and vassals well in previous episodes (and there's many enough), ask them all to conquer Carthage for you. Also consider conquering them from Mycenae shortly before starting the colony, while their military is still weak. (Don't worry about requesting too many strikes - for some reason, ordering a strike on a now-vassal gives a thumb up. And even if it didn't, they'd just rebel, and they'll apologize next year.)
+&nbsp; This location is difficult - there's no food, other than imports, and only two possible trireme locations. You'll need to rely on Hoplites and a lot of imports, or if you treated your allies and vassals well in previous episodes (and there's many enough), ask them all to conquer Carthage for you. Also consider conquering them from Mycenae shortly before starting the colony, then request strikes from the colony while their military is still damaged. (Don't worry about requesting too many strikes - for some reason, requesting a strike on a now-vassal gives a thumb up. And even if it didn't, they'd just rebel, and they'll apologize next year.)
