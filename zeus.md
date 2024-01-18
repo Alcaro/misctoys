@@ -1,5 +1,5 @@
 Sir Walrus' Occasionally Unethical Advice  
-Master of Olympus - Zeus and Master of Atlantis - Poseidon
+Master of Olympus - Zeus and Master of Atlantis - Poseidon  
 https://www.gog.com/en/game/zeus_poseidon
 
 General
@@ -86,7 +86,7 @@ Sheep and goats
 
 will wander all over the meadow if you let them.
 
-If you don't, and instead wall them off with Olive Trees or whatever so they only have a single tile to sit on, you'll face no consequences whatsoever; you can place hundreds of goats on the same tile, they won't mind. (If Master of Atlantis is not installed, you can't build goats on top of each other. They will, however, move if you place a building's or animal's shadow on them, so two tiles is enough.)
+If you don't, and instead wall them off with Olive Trees or whatever so they only have a single tile to sit on, you'll face no consequences whatsoever; you can place hundreds of goats on the same tile, they won't mind. (If Master of Atlantis is not installed, you can't build goats on top of each other. They will, however, move if you place a building's or animal's shadow on them, so two tiles is enough, if you wait for them to move. And then wait for the shepherds to move. Consider building a tile of Wall on the second tile.)
 
 Sanctuaries
 -----------
@@ -108,7 +108,7 @@ Despite what the game manual says about large raiding parties giving more loot, 
 
 If you raid too much, the victim will run out of the resource, and you can't choose that plunder (Any always works; if all resources are exhausted and you pick that, their packs will be overloaded with one single drachma <https://redd.it/ownzkg>). However, there's a glitch here too - if you choose the same resource many times, it will often be preselected and functional for your next raiding party, even if that resource can't be selected normally. It's also perfectly fine to send twenty raiding parties at once; they'll return with 40 years' worth of export, and the victim's resource stocks will replenish in just a few years.
 
-A related glitch is that demanding anything from a rival will always fail, no matter what the manual says about whose military is bigger.
+A related glitch is that demanding anything from a rival will always fail, no matter what the manual says about whose military is bigger. (If your favor is high enough, it'll turn to request, which works.)
 
 Difficulty
 ----------

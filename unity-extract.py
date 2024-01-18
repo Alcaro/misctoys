@@ -423,6 +423,9 @@ def process_unityfs(by):
 	
 	assert body.tell() == uiblock
 
+def process_bundle(by):
+	print("todo: there's a reader in ~/x/ms/unity1.cpp function load_bundle()")
+
 for fn in sys.argv[1:]:
 	with open(fn, "rb") as f:
 		add_file(fn, mmap.mmap(f.fileno(), 0, prot=mmap.PROT_READ), None)
@@ -438,6 +441,8 @@ while remaining_files:
 		process_unitywebdata(by)
 	elif by_head.startswith(b"UnityFS\0"):
 		process_unityfs(by)
+	elif by_head[4:8] == struct.pack(">L", len(by)):
+		process_bundle(by)
 	else:
 		print("-> none ("+str(by[:64])+")")
 
@@ -469,7 +474,7 @@ for objs in unity_objects.values():
 			srclen = s.au64l()
 			by = files[srcfn][srcpos:srcpos+srclen]
 			print(outname)
-			# open("out/"+sanitize_filename(outname)+".bin","wb").write(by)
+			open("out/"+sanitize_filename(outname)+".bin","wb").write(by)
 			# unity3d music is often aac in mp4 container
 			# to check contents, use
 			#  ffprobe "$sfn" -loglevel warning -select_streams a:0 -show_entries stream=codec_name -of csv=p=0

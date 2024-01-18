@@ -43,7 +43,7 @@ print("abcde"[:-2])  # "abc"
 print("abcde"[:-1])  # "abcd"
 print("abcde"[:-0])  # ""
 # should've been [:~3], [:~2], [:~1], [:~0]
-# "abcde"[:None] is "abcde", and you can use "abcde"[:len("abcde")-0], but ~ would've been smoother
+# "abcde"[-0 or None] is reasonably short, but it looks like token soup unless you've seen it before
 
 # functions' default arguments are only evaluated once, not on every call
 def g(l=[]):
@@ -60,7 +60,7 @@ a = my_cls()
 b = my_cls()
 a.member1.append(50)
 a.member2.append(51)
-print(b.member1, b.member2)
+print(b.member1, b.member2)  # [50] []
 
 # no errors or warnings for defining the same thing twice
 def a(): pass
@@ -69,6 +69,29 @@ class b: pass
 class b:
 	def c(self): pass
 	def c(self): pass
+
+# Exactly one of these four will print in different order between runs.
+a={1,2,3,4,5}
+b={1:1,2:2,3:3,4:4,5:5}
+c={"a","b","c","d","e"}
+d={"a":1,"b":2,"c":3,"d":4,"e":5}
+print(a)
+print(b)
+print(c)
+print(d)
+# This changed in Python 3.2.3; before that, all were consistent order. Introducing behavioral changes in minor versions is impolite.
+# Similarly, int("1"*5000) was disabled in 3.10.7, 3.9.14, 3.8.14 and 3.7.14.
+
+print("\S")  # it's the two characters \ S; in a sane language, unknown escapes are an error
+
+class eee:
+	MY_VALUE = 42
+	# one of these demands to be prefixed with class name, the other demands the opposite
+	def a(self, arg = MY_VALUE):
+		return arg + eee.MY_VALUE
+print(eee().a())
+
+print("☃" in open(__file__).read())  # this will find the snowman on this line, right? You sure? Did you try it on Windows?
 
 def fn():
 	# this returns an empty iterator; the 3 is discarded, with no error
@@ -81,9 +104,6 @@ print(list(fn()))
 print(bool(str(False)))  # it's unexpectedly True. Though I'm not entirely sure what would be a better behavior.
 
 # the XML parsers enable several dangerous features by default https://docs.python.org/3/library/xml.html#xml-vulnerabilities
-
-# the hashmap iteration fiasco - made it impossible to compare dicts between runs, and was backported all over
-# and then they chose to repeat that fiasco with int("1"*5000)
 
 # indentation based syntax - easy to get mixed tabs and spaces and all kinds of fun errors,
 # doesn't allow making debug code more prominent by removing indentation,
