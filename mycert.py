@@ -106,12 +106,15 @@ def http(url, body=None):
 	return ( code, headers, ret )
 
 while True:
+	n = 0
 	try:
 		oldcert = crypto.load_certificate(crypto.FILETYPE_PEM, open("/home/walrus/mount/server/etc/ssl/live/fullchain.pem", "rb").read())
 	except OSError:
 		print("sshfs not mounted yet, retrying later")
 		time.sleep(5)
-		continue
+		n += 1
+		if n < 60:
+			continue
 	oldexpiry = datetime.datetime.strptime(oldcert.get_notAfter().decode("utf-8"), "%Y%m%d%H%M%SZ")
 	if oldexpiry - datetime.timedelta(30) > datetime.datetime.now():
 		print("Cert expiry", oldexpiry, "is distant enough - not renewing")
@@ -197,6 +200,10 @@ csr.set_pubkey(out_key)
 csr.sign(out_key, "sha256")
 _,_,result = http(order["finalize"], { "csr": b64(crypto.dump_certificate_request(crypto.FILETYPE_ASN1, csr)) })
 print(result)
+if result['status'] == 403:
+	for auth in order["authorizations"]:
+		_,_,challenges = http(auth, None)
+		print(challenges)
 
 _,_,cert = http(result["certificate"], None)
 print(cert)

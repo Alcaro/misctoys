@@ -3,7 +3,8 @@
 
 # catching SIGINT by default; ^C should always terminate the process, even if it's currently
 #  awaiting GUI events or otherwise not executing python code
-# (and even when the KeyboardInterrupt is raised, many GUI frameworks and tools just print the exception and discard it without terminatíng)
+# (and even when the KeyboardInterrupt is raised, many GUI frameworks and tools just
+#  print the exception and discard it without terminatíng)
 
 # python ternary is middle endian, and inconsistent with most other programming languages
 # being written in english pronunciation order is a valid argument, but it's weak
@@ -31,6 +32,7 @@ lst.append((3,4))
 xss = [[1,2],[3],[],[4]]
 print([x  for xs in xss  for x in xs])
 # print([x  for x in xs  for xs in xss]) would be a lot less ugly, or print([for xs in xss  for x in xs  select x])
+# (oh, and every Python reformatter tool I'm aware of would remove the double spaces from the above, making it near impossible to parse)
 
 # dir() and id() are too rare, and too valuable as variable names, to be builtin auto-imported functions
 print(dir(1))
@@ -45,12 +47,14 @@ print("abcde"[:-0])  # ""
 # should've been [:~3], [:~2], [:~1], [:~0]
 # "abcde"[-0 or None] is reasonably short, but it looks like token soup unless you've seen it before
 
+print("abcde"[3:9])  # it's "de". I'd expect an IndexError.
+
 # functions' default arguments are only evaluated once, not on every call
 def g(l=[]):
 	l.append(5)
-	print(l)
-g()  # [5]
-g()  # [5, 5]
+	return l
+print(g())  # [5]
+print(g())  # [5, 5]
 # same goes for classes, have to set it in __init__()
 class my_cls:
 	member1 = []
@@ -61,6 +65,20 @@ b = my_cls()
 a.member1.append(50)
 a.member2.append(51)
 print(b.member1, b.member2)  # [50] []
+
+global1 = []
+def a():
+	global1.append(5)  # this works
+a()
+global2 = 5
+def b():
+	global2 += 1  # this doesn't
+try:
+	b()
+except UnboundLocalError:
+	pass
+
+print(hex(123))  # includes a 0x prefix. Every other hex formatting instruction I'm aware of in every language defaults to excluding it.
 
 # no errors or warnings for defining the same thing twice
 def a(): pass
@@ -83,6 +101,7 @@ print(d)
 # Similarly, int("1"*5000) was disabled in 3.10.7, 3.9.14, 3.8.14 and 3.7.14.
 
 print("\S")  # it's the two characters \ S; in a sane language, unknown escapes are an error
+# (it prints a warning since Python 3.12. Better late than never...)
 
 class eee:
 	MY_VALUE = 42
@@ -92,6 +111,7 @@ class eee:
 print(eee().a())
 
 print("☃" in open(__file__).read())  # this will find the snowman on this line, right? You sure? Did you try it on Windows?
+# (may be fixed in Python 3.15 <https://peps.python.org/pep-0686/>, but the relevant documentation is wildly incomplete and contradictory)
 
 def fn():
 	# this returns an empty iterator; the 3 is discarded, with no error

@@ -13,6 +13,7 @@
 # https://dl.winehq.org/wine/source/
 # https://developer.microsoft.com/en-us/windows/downloads/windows-sdk/
 # https://www.microsoft.com/en-us/download/details.aspx?id=6812
+
 # there are also GUID lists at
 # https://hexacorn.com/d/guids.txt
 # https://gist.github.com/stevemk14ebr/af8053c506ef895cd520f8017a81f913
@@ -235,10 +236,39 @@ def find_guid_names(text) -> list[tuple[uuid.UUID,str]]:
 	# just hardcode them instead
 	for m in re.finditer(r'GUID_BUILDER\((\w+),([0-9A-Fa-f,]+)\)', text):
 		ret.append(( uuid.UUID(m[2].replace(",","")), m[1] ))
+	# FOURCCs expressed as multi-char literals
 	for m in re.finditer(r'OUR_GUID_ENTRY\((\w+),\s*\'(....)\',([0-9A-Fa-fx, ]+)\)', text):
 		guid = m[2].encode("ascii").hex()
 		guid += m[3].replace("0x","").replace(",","").replace(" ","")
 		ret.append(( uuid.UUID(guid), m[1] ))
+	# FOURCCs and various named constants
+	for m in re.finditer(r'DEFINE_MEDIATYPE_GUID\(\s*(\w+),\s*(\S[^\n]*\S)\s*\);', text):
+		if m2 := re.fullmatch(r'FCC\(\'(....)\'\)', m[2]):
+			fmt = m2[1].encode("ascii").hex()
+		elif m2 := re.fullmatch(r'MAKEFOURCC\(\'(.)\',\'(.)\',\'(.)\',\'(.)\'\)', m[2]):
+			fmt = (m2[1]+m2[2]+m2[3]+m2[4]).encode("ascii").hex()
+		elif '0x38, 0x9b, 0x71' in m[2]:
+			continue  # not interested in #define DEFINE_MEDIATYPE_GUID(name, format) DEFINE_GUID(blah, blah)
+		else:
+			# just hardcode these
+			keys = { '0x00000000': 0x00000000,
+			         'D3DFMT_R8G8B8': 20, 'D3DFMT_A8R8G8B8': 21, 'D3DFMT_X8R8G8B8': 22, 'D3DFMT_R5G6B5': 23,
+			         'D3DFMT_X1R5G5B5': 24, 'D3DFMT_A2B10G10R10': 31, 'D3DFMT_P8': 41, 'D3DFMT_L8': 50,
+			         'D3DFMT_D16': 80, 'D3DFMT_L16': 81, 'D3DFMT_A16B16G16R16F': 113,
+			         'WAVE_FORMAT_PCM': 0x0001, 'WAVE_FORMAT_IEEE_FLOAT': 0x0003, 'WAVE_FORMAT_DTS': 0x0008,
+			         'WAVE_FORMAT_DOLBY_AC3_SPDIF': 0x0092, 'WAVE_FORMAT_DRM': 0x0009, 'WAVE_FORMAT_WMAUDIO2': 0x0161,
+			         'WAVE_FORMAT_WMAUDIO3': 0x0162, 'WAVE_FORMAT_WMAUDIO_LOSSLESS': 0x0163, 'WAVE_FORMAT_WMASPDIF': 0x0164,
+			         'WAVE_FORMAT_WMAVOICE9': 0x000a, 'WAVE_FORMAT_MPEGLAYER3': 0x0055, 'WAVE_FORMAT_MPEG': 0x0050,
+			         'WAVE_FORMAT_MPEG_HEAAC': 0x1610, 'WAVE_FORMAT_MPEG_ADTS_AAC': 0x1600, 'WAVE_FORMAT_AMR_NB': 0x7361,
+			         'WAVE_FORMAT_AMR_WB': 0x7362, 'WAVE_FORMAT_AMR_WP': 0x7363, 'WAVE_FORMAT_FLAC': 0xf1ac,
+			         'WAVE_FORMAT_ALAC': 0x6c61, 'WAVE_FORMAT_OPUS': 0x704f, 'WAVE_FORMAT_DOLBY_AC4': 0xac40,
+			         # these aren't in any headers, only in Wine's source code
+			         'WAVE_FORMAT_RAW_AAC1': 0x00FF,
+			         'D3DFMT_A1': 118, 'D3DFMT_A1R5G5B5': 25,'D3DFMT_A4R4G4B4': 26,'D3DFMT_A2R10G10B10': 35,
+			         'FAUDIO_FORMAT_XMAUDIO2': 0x0166,
+			         }
+			fmt = '%.8x' % keys[m[2]]
+		ret.append(( uuid.UUID(fmt + '-0000-0010-8000-00aa00389b71'), m[1] ))
 	
 	text = text.replace('\\\r\n','   ').replace('\\\n','  ').replace('\r','\n')
 	
@@ -426,6 +456,9 @@ def guids_from_files(fns):
 		by = open(fn, "rb").read()
 		if by.startswith(b"!<arch>\n"):
 			named_guids.extend(guids_from_lib(by))
+		elif b'\x00' in by:
+			# ignore binary files
+			pass
 		else:
 			try:
 				named_guids.extend(find_guid_names(by.decode("utf-8")))
@@ -487,6 +520,17 @@ guid_hash_buckets = 65536
 def guid_hash(guid):
 	# why is crc32 in binascii and zlib, and not in hashlib or something
 	return binascii.crc32(guid.bytes) & 65535
+
+# guidbox structure:
+# - u8[8] magic = "GUIDBOX\0"
+# - uint32_t[65537] buckets ([0] = points to next, [65536] = points to last_name_end)
+# - struct { u32 name_start; u8[16] guid; } * number of guids
+# - u32 last_name_end
+# - u8[] names (no nul terminators)
+# hash function is crc32(guid.bytes)&65535
+# bucket and name positions are byte offsets in the file
+# bucket and name sizes are implicit - check where the next one starts
+# sorting in each bucket is irrelevant; this tool uses the GUID's full bitwise representation (but most buckets only have 1 or 0 entries)
 
 def create_guidbox(named_guids):
 	buckets = [ [] for _ in range(guid_hash_buckets) ]
@@ -568,11 +612,13 @@ if args.create:
 	named_guids = decide_guid_names(named_guids)
 	by = create_guidbox(named_guids)
 	open(args.guidbox,"wb").write(by)
+	print("Created guidbox with", len(named_guids), "entries")
 elif args.dump:
 	guidbox = open(args.guidbox,"rb").read()
 	for guid,name in iterate_guidbox(guidbox):
 		print('DEFINE_GUIDSTRUCT("'+str(guid)+'", '+name+');')
 else:
+	all_guids_by_name = None
 	guidbox = open(args.guidbox,"rb").read()
 	text = ' '.join(args.args)
 	if find_guids(text):
@@ -581,14 +627,30 @@ else:
 		for fn in args.args:
 			if fn == '-':
 				for line in sys.stdin:
+					# process stdin in a streaming fashion, like cat
+					# it means guids split across multiple lines won't be processed, but just don't do that.
 					print(filter_guids(guidbox, line), end='')
 			else:
-				print(filter_guids(guidbox, open(fn,"rt").read()), end='')
+				try:
+					text = open(fn,"rt").read()
+				except FileNotFoundError:
+					if all_guids_by_name is None:
+						all_guids_by_name = { name:guid for guid,name in iterate_guidbox(guidbox) }
+					if fn in all_guids_by_name:
+						print(str(all_guids_by_name[fn]))
+						continue
+					raise
+				print(filter_guids(guidbox, text), end='')
 
 
 #######################
 # Leftover debug code #
 #######################
+
+# guidbox created with
+# time guidfilt --create .../msvc-include/ .../mingw64-11.2.0/x86_64-w64-mingw32/include/ .../wine/
+# Created guidbox with 35523 entries
+# real 0m13.678s
 
 if False:
 	good_guids = [

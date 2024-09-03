@@ -188,8 +188,12 @@ def lz4_decompress(by):
 def unity_decompress(by, flags):
 	if flags&63 == 0:
 		return by
+	# https://imbushuo.net/blog/archives/505/ says 1 is LZMA
+	if flags&63 == 2:
+		return lz4_decompress(by)
 	if flags&63 == 3:
 		return lz4_decompress(by)
+	print(flags)
 	1/0
 
 def unity_enumerate_objects(f):
@@ -199,11 +203,12 @@ def unity_enumerate_objects(f):
 	metasz = s.u32b()
 	filesz = s.u32b()
 	version = s.u32b()
-	assert version in (21,22)
-	if version == 21:
+	
+	assert version in (17,21,22)
+	if version <= 21:
 		dataoffs = s.u32b()
 		assert s.u32b() == 0  # big endian
-	if version == 22:
+	if version >= 22:
 		assert metasz == 0
 		assert filesz == 0
 		assert s.u32b() == 0  # unknown, probably padding
@@ -296,6 +301,7 @@ def unity_enumerate_objects(f):
 		obj_len = s.u32l()
 		type_idx = s.u32l()
 		obj_type = types[type_idx]
+		# this pokes ext_files before it's filled in - this is safe, it's passed by reference
 		objs.append(UnityObject(obj_id, obj_type, get_obj_bytes(obj_start, obj_len), ext_files))
 	
 	# adds
@@ -311,12 +317,13 @@ def unity_enumerate_objects(f):
 		assert s.u32l() == 0
 		ext_files.append(s.strnul())
 	
-	# unknown what this is
-	# I've seen it only in a single game, containing the values
-	# ffffffff0000000000000000000000000000000000000000000000000000000000000000000000
-	# ffffffff0001000000000000000000000000000000000000000000000000000000000000000000
-	for n in range(s.u32l()):
-		print(s.bytes(39).hex())
+	if version >= 21:
+		# unknown what this is
+		# I've seen it only in a single game, containing the values
+		# ffffffff0000000000000000000000000000000000000000000000000000000000000000000000
+		# ffffffff0001000000000000000000000000000000000000000000000000000000000000000000
+		for n in range(s.u32l()):
+			print(s.bytes(39).hex())
 	assert s.u8() == 0
 	assert s.remaining() == 0
 	
@@ -361,7 +368,6 @@ def process_unityfs(by):
 	in_pos = head.tell()
 	
 	BLOCK_SIZE = 131072
-	BLOCK_FLAGS = 3
 	class UnityFS:
 		def __init__(self, blocks):
 			self.blocks = blocks
@@ -402,6 +408,7 @@ def process_unityfs(by):
 	nblocks = body.u32b()
 	for n in range(nblocks):
 		u_size = body.u32b()
+		assert u_size == BLOCK_SIZE
 		c_size = body.u32b()
 		flags = body.u16b()
 		blocks.append(( head.bytes(c_size), flags ))
