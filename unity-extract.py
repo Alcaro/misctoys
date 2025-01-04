@@ -359,9 +359,6 @@ def process_unityfs(by):
 	
 	block = unity_decompress(head.bytes(ciblock), flags)
 	
-	if version >= 7:
-		head.align(16)
-	
 	body = bytestream(block)
 	body.bytes(16)  # guid
 	
@@ -408,7 +405,7 @@ def process_unityfs(by):
 	nblocks = body.u32b()
 	for n in range(nblocks):
 		u_size = body.u32b()
-		assert u_size == BLOCK_SIZE
+		assert u_size == BLOCK_SIZE or n == nblocks-1
 		c_size = body.u32b()
 		flags = body.u16b()
 		blocks.append(( head.bytes(c_size), flags ))
@@ -442,7 +439,14 @@ while remaining_files:
 	print(fn)
 	by = files[fn]
 	by_head = bytes(by[0:64])
-	if by_head.startswith(b"\x1F\x8B"):
+	if b'UnityWeb Compressed Content (brotli)' in by_head:
+		try:
+			import brotli
+			add_file(fn, brotli.decompress(by), "brotli")
+		except ModuleNotFoundError:
+			print("that file is compressed with Brotli; install your python brotli module")
+			raise
+	elif by_head.startswith(b"\x1F\x8B"):
 		add_file(gzip_fname(by), gzip.open(io.BytesIO(by), mode='rb').read(), "gzip")
 	elif by_head.startswith(b"UnityWebData1.0\0"):
 		process_unitywebdata(by)

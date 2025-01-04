@@ -121,7 +121,7 @@ def fn():
 		yield 0
 print(list(fn()))
 
-print(bool(str(False)))  # it's unexpectedly True. Though I'm not entirely sure what would be a better behavior.
+print(bool(str(False)))  # it's unexpectedly True. Though both functions are sane on their own, I don't know how to fix that.
 
 # the XML parsers enable several dangerous features by default https://docs.python.org/3/library/xml.html#xml-vulnerabilities
 
